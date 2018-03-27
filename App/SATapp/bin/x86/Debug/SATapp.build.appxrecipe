@@ -449,17 +449,14 @@
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.TextRenderingModule.dll">
       <PackagePath>UnityEngine.TextRenderingModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.UIModule.dll">
-      <PackagePath>UnityEngine.UIModule.dll</PackagePath>
+    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.TerrainPhysicsModule.dll">
+      <PackagePath>UnityEngine.TerrainPhysicsModule.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.UIElementsModule.dll">
       <PackagePath>UnityEngine.UIElementsModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.TerrainPhysicsModule.dll">
-      <PackagePath>UnityEngine.TerrainPhysicsModule.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.SpriteShapeModule.dll">
-      <PackagePath>UnityEngine.SpriteShapeModule.dll</PackagePath>
+    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.TerrainModule.dll">
+      <PackagePath>UnityEngine.TerrainModule.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.SpriteMaskModule.dll">
       <PackagePath>UnityEngine.SpriteMaskModule.dll</PackagePath>
@@ -467,11 +464,14 @@
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.SharedInternalsModule.dll">
       <PackagePath>UnityEngine.SharedInternalsModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.TerrainModule.dll">
-      <PackagePath>UnityEngine.TerrainModule.dll</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.StyleSheetsModule.dll">
       <PackagePath>UnityEngine.StyleSheetsModule.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.SpriteShapeModule.dll">
+      <PackagePath>UnityEngine.SpriteShapeModule.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.UIModule.dll">
+      <PackagePath>UnityEngine.UIModule.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.VRModule.dll">
       <PackagePath>UnityEngine.VRModule.dll</PackagePath>
@@ -509,9 +509,6 @@
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.UnityWebRequestAudioModule.dll">
       <PackagePath>UnityEngine.UnityWebRequestAudioModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.ScreenCaptureModule.dll">
-      <PackagePath>UnityEngine.ScreenCaptureModule.dll</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.CoreModule.dll">
       <PackagePath>UnityEngine.CoreModule.dll</PackagePath>
     </AppxPackagedFile>
@@ -548,11 +545,20 @@
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.AIModule.dll">
       <PackagePath>UnityEngine.AIModule.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.GameCenterModule.dll">
+      <PackagePath>UnityEngine.GameCenterModule.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.PerformanceReportingModule.dll">
+      <PackagePath>UnityEngine.PerformanceReportingModule.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.ParticleSystemModule.dll">
       <PackagePath>UnityEngine.ParticleSystemModule.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.ParticlesLegacyModule.dll">
       <PackagePath>UnityEngine.ParticlesLegacyModule.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.ScreenCaptureModule.dll">
+      <PackagePath>UnityEngine.ScreenCaptureModule.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.PhysicsModule.dll">
       <PackagePath>UnityEngine.PhysicsModule.dll</PackagePath>
@@ -560,26 +566,20 @@
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.Physics2DModule.dll">
       <PackagePath>UnityEngine.Physics2DModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.PerformanceReportingModule.dll">
-      <PackagePath>UnityEngine.PerformanceReportingModule.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.JSONSerializeModule.dll">
-      <PackagePath>UnityEngine.JSONSerializeModule.dll</PackagePath>
+    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.ImageConversionModule.dll">
+      <PackagePath>UnityEngine.ImageConversionModule.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.GridModule.dll">
       <PackagePath>UnityEngine.GridModule.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.GameCenterModule.dll">
-      <PackagePath>UnityEngine.GameCenterModule.dll</PackagePath>
+    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.JSONSerializeModule.dll">
+      <PackagePath>UnityEngine.JSONSerializeModule.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.InputModule.dll">
       <PackagePath>UnityEngine.InputModule.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.IMGUIModule.dll">
       <PackagePath>UnityEngine.IMGUIModule.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.ImageConversionModule.dll">
-      <PackagePath>UnityEngine.ImageConversionModule.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.Timeline.dll">
       <PackagePath>UnityEngine.Timeline.dll</PackagePath>
@@ -589,6 +589,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.UI.dll">
       <PackagePath>UnityEngine.UI.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.SpatialTracking.dll">
+      <PackagePath>UnityEngine.SpatialTracking.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\UnityEngine.HoloLens.dll">
       <PackagePath>UnityEngine.HoloLens.dll</PackagePath>
