@@ -6,6 +6,7 @@
 # Write a line equal to 'keep-all' (without quotes) to keep files regardless their modification (preserved accross builds)
 # Default behavior is to never overwrite files
 SATapp.sln: C467F7F836C23E0826C6991600060DE2
+SATapp.sln.metaproj: A20D87E68BBCB9439ED16CA4377D0F58
 SATapp\App.cs: F40CFB43F566C916B08A89F4AC1B43B5
 SATapp\Package.appxmanifest: EA075D2168187095980001402316976B
 SATapp\project.json: 1D02BC64BAC0D041019673A1C4C51737
@@ -17,6 +18,14 @@ SATapp\Assets\Square44x44Logo.scale-200.png: 6C6EF27184ABE9D870A9D564953775DE
 SATapp\Assets\Square44x44Logo.targetsize-24_altform-unplated.png: 156637F7B5363E983E7A46D8E533A23D
 SATapp\Assets\StoreLogo.png: 90BD194CA4A7CFFF3E8B8222229857FB
 SATapp\Assets\Wide310x150Logo.scale-200.png: C96846A80DF667F87355569CD816192D
+SATapp\bin\x86\Master\AppX\Assets\SplashScreen.scale-200.png: A85C1D7624B6902CF8CEBD6F0200A826
+SATapp\bin\x86\Master\AppX\Assets\Square150x150Logo.scale-200.png: E02834B4A5DFB97FF8E212C1CACBB084
+SATapp\bin\x86\Master\AppX\Assets\Square44x44Logo.scale-200.png: 6C6EF27184ABE9D870A9D564953775DE
+SATapp\bin\x86\Master\AppX\Assets\Square44x44Logo.targetsize-24_altform-unplated.png: 156637F7B5363E983E7A46D8E533A23D
+SATapp\bin\x86\Master\AppX\Assets\StoreLogo.png: 90BD194CA4A7CFFF3E8B8222229857FB
+SATapp\bin\x86\Master\AppX\Assets\Wide310x150Logo.scale-200.png: C96846A80DF667F87355569CD816192D
+SATapp\bin\x86\Master\AppX\Properties\Default.rd.xml: 72EB282657164E79A1C42F6240984826
 SATapp\obj\x86\Debug\SATapp.csproj.CopyComplete: D41D8CD98F00B204E9800998ECF8427E
+SATapp\obj\x86\Master\SATapp.csproj.CopyComplete: D41D8CD98F00B204E9800998ECF8427E
 SATapp\obj\x86\Release\SATapp.csproj.CopyComplete: D41D8CD98F00B204E9800998ECF8427E
 SATapp\Properties\Default.rd.xml: 72EB282657164E79A1C42F6240984826
