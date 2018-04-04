@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using HoloToolkit.Unity;
 
 
 public class CursorManager : Singleton<CursorManager>
@@ -22,12 +23,12 @@ public class CursorManager : Singleton<CursorManager>
 
     void Update()
     {
-        if (GazeManager.Instance == null || CursorOnHolograms == null || CursorOffHolograms == null)
+        if (SatGazeManager.Instance == null || CursorOnHolograms == null || CursorOffHolograms == null)
         {
             return;
         }
 
-        if (GazeManager.Instance.Hit)
+        if (SatGazeManager.Instance.Hit)
         {
             CursorOnHolograms.SetActive(true);
             CursorOffHolograms.SetActive(false);
@@ -38,7 +39,7 @@ public class CursorManager : Singleton<CursorManager>
             CursorOnHolograms.SetActive(false);
         }
 
-        gameObject.transform.position = GazeManager.Instance.Position;
-        gameObject.transform.forward = GazeManager.Instance.Normal;
+        gameObject.transform.position = SatGazeManager.Instance.Position;
+        gameObject.transform.forward = SatGazeManager.Instance.Normal;
     }
 }
