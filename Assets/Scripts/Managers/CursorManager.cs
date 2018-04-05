@@ -10,6 +10,10 @@ public class CursorManager : Singleton<CursorManager>
     [Tooltip("Drag the Cursor object to show when it does not hit a hologram.")]
     public GameObject CursorOffHolograms;
 
+    public GameObject CursorFingerDetected;
+
+    public GameObject CursorFingerDown;
+
     void Awake()
     {
         if (CursorOnHolograms == null || CursorOffHolograms == null)
@@ -17,8 +21,7 @@ public class CursorManager : Singleton<CursorManager>
             return;
         }
 
-        CursorOnHolograms.SetActive(false);
-        CursorOffHolograms.SetActive(false);
+        clearCursors();
     }
 
     void Update()
@@ -28,18 +31,50 @@ public class CursorManager : Singleton<CursorManager>
             return;
         }
 
-        if (SatGazeManager.Instance.Hit)
+        if (CursorFingerDetected != null && CursorFingerDetected != null && HandsManager.Instance.HandDetected)
         {
-            CursorOnHolograms.SetActive(true);
+            if (HandsManager.Instance.FingerDown)
+            {
+                Debug.Log("1");
+                CursorOnHolograms.SetActive(false);
+                CursorOffHolograms.SetActive(false);
+                CursorFingerDetected.SetActive(false);
+                CursorFingerDown.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("2");
+                CursorOnHolograms.SetActive(false);
+                CursorOffHolograms.SetActive(false);
+                CursorFingerDown.SetActive(false);
+                CursorFingerDetected.SetActive(true);
+            }
+        }
+        else if (SatGazeManager.Instance.Hit)
+        {
+            Debug.Log("3");
             CursorOffHolograms.SetActive(false);
+            if (CursorFingerDetected != null) CursorFingerDetected.SetActive(false);
+            if (CursorFingerDown != null) CursorFingerDown.SetActive(false);
+            CursorOnHolograms.SetActive(true);
         }
         else
         {
-            CursorOffHolograms.SetActive(true);
+            Debug.Log("4");
             CursorOnHolograms.SetActive(false);
+            if (CursorFingerDetected != null) CursorFingerDetected.SetActive(false);
+            if (CursorFingerDown != null) CursorFingerDown.SetActive(false);
+            CursorOffHolograms.SetActive(true);
         }
 
         gameObject.transform.position = SatGazeManager.Instance.Position;
         gameObject.transform.forward = SatGazeManager.Instance.Normal;
+    }
+
+    private void clearCursors() {
+        CursorOnHolograms.SetActive(false);
+        CursorOffHolograms.SetActive(false);
+        if (CursorFingerDetected != null ) CursorFingerDetected.SetActive(false);
+        if (CursorFingerDown != null)  CursorFingerDown.SetActive(false);
     }
 }

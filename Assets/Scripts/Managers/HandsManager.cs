@@ -16,6 +16,12 @@ public class HandsManager : Singleton<HandsManager>
         private set;
     }
 
+    public bool FingerDown
+    {
+        get;
+        private set;
+    }
+
     public GameObject FocusedGameObject { get; private set; }
 
     void Awake()
@@ -57,6 +63,7 @@ public class HandsManager : Singleton<HandsManager>
     private void InteractionManager_InteractionSourceLost(InteractionSourceLostEventArgs obj)
     {
         HandDetected = false;
+        FingerDown = false;
 
         if (FocusedGameObject != null) {
             FocusedGameObject = InteractibleManager.Instance.FocusedGameObject;
@@ -68,6 +75,8 @@ public class HandsManager : Singleton<HandsManager>
 
     private void InteractionManager_InteractionSourcePressed(InteractionSourcePressedEventArgs hand)
     {
+        FingerDown = true;
+
         if (InteractibleManager.Instance.FocusedGameObject != null)
         {
             // Play a select sound if we have an audio source and are not targeting an asset with a select sound.
@@ -84,6 +93,8 @@ public class HandsManager : Singleton<HandsManager>
 
     private void InteractionManager_InteractionSourceReleased(InteractionSourceReleasedEventArgs hand)
     {
+        FingerDown = false;
+
         if (InteractibleManager.Instance.FocusedGameObject != null) {
             FocusedGameObject = InteractibleManager.Instance.FocusedGameObject;
             FocusedGameObject.GetComponent<Interactible>().OffSelect();
