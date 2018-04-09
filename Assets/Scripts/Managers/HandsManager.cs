@@ -67,7 +67,8 @@ public class HandsManager : Singleton<HandsManager>
 
         if (FocusedGameObject != null) {
             FocusedGameObject = InteractibleManager.Instance.FocusedGameObject;
-            FocusedGameObject.GetComponent<Interactible>().Deselect();
+            Interactible interactor = FocusedGameObject.GetComponent<Interactible>();
+            if (interactor != null) interactor.Deselect();
         }
 
         ResetFocusedGameObject();
@@ -87,7 +88,8 @@ public class HandsManager : Singleton<HandsManager>
             }
 
             FocusedGameObject = InteractibleManager.Instance.FocusedGameObject;
-            FocusedGameObject.GetComponent<Interactible>().OnSelect();
+            Interactible interactor = FocusedGameObject.GetComponent<Interactible>();
+            if (interactor != null) interactor.OnSelect();
         }
     }
 
@@ -97,7 +99,8 @@ public class HandsManager : Singleton<HandsManager>
 
         if (InteractibleManager.Instance.FocusedGameObject != null) {
             FocusedGameObject = InteractibleManager.Instance.FocusedGameObject;
-            FocusedGameObject.GetComponent<Interactible>().OffSelect();
+            Interactible interactor = FocusedGameObject.GetComponent<Interactible>();
+            if (interactor != null) interactor.OffSelect();
         }
         ResetFocusedGameObject();
     }

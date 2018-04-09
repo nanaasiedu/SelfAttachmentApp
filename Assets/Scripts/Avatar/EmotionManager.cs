@@ -6,7 +6,7 @@ using UnityEngine.Windows.Speech;
 
 public class EmotionManager : MonoBehaviour {
 
-    public Animator animator;
+    private Animator animator;
 
     KeywordRecognizer keywordRecognizer = null;
     Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
@@ -32,12 +32,24 @@ public class EmotionManager : MonoBehaviour {
 		
 	}
 
+    public void setHappyEmotion() {
+        setEmotion("HAPPY");
+    }
+
+    public void setSadEmotion() {
+        setEmotion("SAD");
+    }
+
     private void setAnimateOnSpeech(string speechCommand, string animationName) {
         keywords.Add(speechCommand, () =>
         {
             Debug.Log("sound: " + speechCommand + " recognised");
-            animator.Play(animationName, -1, 0f);
+            setEmotion(animationName);
         });
+    }
+
+    private void setEmotion(string animationName) {
+        animator.Play(animationName, -1, 0f);
     }
 
     private void KeywordRecognizer_OnPhraseRecognized(PhraseRecognizedEventArgs args)

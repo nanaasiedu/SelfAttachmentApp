@@ -35,7 +35,6 @@ public class CursorManager : Singleton<CursorManager>
         {
             if (HandsManager.Instance.FingerDown)
             {
-                Debug.Log("1");
                 CursorOnHolograms.SetActive(false);
                 CursorOffHolograms.SetActive(false);
                 CursorFingerDetected.SetActive(false);
@@ -43,7 +42,6 @@ public class CursorManager : Singleton<CursorManager>
             }
             else
             {
-                Debug.Log("2");
                 CursorOnHolograms.SetActive(false);
                 CursorOffHolograms.SetActive(false);
                 CursorFingerDown.SetActive(false);
@@ -52,7 +50,6 @@ public class CursorManager : Singleton<CursorManager>
         }
         else if (SatGazeManager.Instance.Hit)
         {
-            Debug.Log("3");
             CursorOffHolograms.SetActive(false);
             if (CursorFingerDetected != null) CursorFingerDetected.SetActive(false);
             if (CursorFingerDown != null) CursorFingerDown.SetActive(false);
@@ -60,7 +57,6 @@ public class CursorManager : Singleton<CursorManager>
         }
         else
         {
-            Debug.Log("4");
             CursorOnHolograms.SetActive(false);
             if (CursorFingerDetected != null) CursorFingerDetected.SetActive(false);
             if (CursorFingerDown != null) CursorFingerDown.SetActive(false);

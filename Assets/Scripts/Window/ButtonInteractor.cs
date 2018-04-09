@@ -1,52 +1,75 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HoloToolkit.Unity.Buttons;
 
-public class ButtonInteractor : MonoBehaviour, Interactible {
+public class ButtonInteractor : MonoBehaviour, Interactible
+{
 
-    public Material defaultMaterial;
-    public Material hoverMaterial;
-    public Material selectMaterial;
-
-    private Renderer renderer;
-    private bool isFocused;
+    public GameObject targetObject;
+    public string targetMethod;
 
 	// Use this for initialization
 	void Start () {
-        renderer = gameObject.GetComponent<Renderer>();
-        renderer.material = defaultMaterial;
-        isFocused = false;
-    }
+		
+	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
-    public void GazeEntered() {
-        renderer.material = hoverMaterial;
-        isFocused = true;
+    public void GazeEntered()
+    {
+        Button buttonComponent = gameObject.GetComponent<Button>();
+
+        if (buttonComponent != null) {
+            buttonComponent.OnStateChange(ButtonStateEnum.ObservationTargeted);
+        }
+        
     }
 
-    public void GazeExited() {
-        renderer.material = defaultMaterial;
-        isFocused = false;
+    public void GazeExited()
+    {
+        Button buttonComponent = gameObject.GetComponent<Button>();
+
+        if (buttonComponent != null)
+        {
+            buttonComponent.OnStateChange(ButtonStateEnum.Observation);
+        }
     }
 
-    public void OnSelect() {
-        renderer.material = selectMaterial;
+    public void OnSelect()
+    {
+        Button buttonComponent = gameObject.GetComponent<Button>();
+
+        if (buttonComponent != null)
+        {
+            buttonComponent.OnStateChange(ButtonStateEnum.Pressed);
+        }
     }
 
-    public void OffSelect() {
-        unSelectMaterial();
-        Debug.Log("Action!!!!!!!!!!");
+    public void OffSelect()
+    {
+        Button buttonComponent = gameObject.GetComponent<Button>();
+
+        if (buttonComponent != null)
+        {
+            buttonComponent.OnStateChange(ButtonStateEnum.Observation);
+        }
+
+        if (targetObject != null) {
+            targetObject.SendMessage(targetMethod);
+        }
     }
 
-    public void Deselect() {
-        unSelectMaterial();
-    }
+    public void Deselect()
+    {
+        Button buttonComponent = gameObject.GetComponent<Button>();
 
-    private void unSelectMaterial() {
-        renderer.material = isFocused ? hoverMaterial : defaultMaterial;
+        if (buttonComponent != null)
+        {
+            buttonComponent.OnStateChange(ButtonStateEnum.Observation);
+        }
     }
 }
