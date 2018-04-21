@@ -40,6 +40,14 @@ public class EmotionManager : MonoBehaviour {
         setEmotion("SAD");
     }
 
+    public void setNeutralEmotion() {
+        setEmotion("NEUTRAL");
+    }
+
+    public void setScaredEmotion() {
+        setEmotion("SCARED");
+    }
+
     private void setAnimateOnSpeech(string speechCommand, string animationName) {
         keywords.Add(speechCommand, () =>
         {

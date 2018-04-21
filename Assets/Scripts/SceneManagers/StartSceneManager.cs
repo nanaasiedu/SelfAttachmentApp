@@ -4,10 +4,15 @@ using UnityEngine;
 
 using HoloToolkit.Unity;
 
-public class StartSceneManager : Singleton<StartSceneManager>
+public class StartSceneManager : MonoBehaviour
 {
     void openTherapyRoomScene() {
+        ScenesData.currentProtocol = ScenesData.ProtocolType.NONE;
         Application.LoadLevel("TherapyRoom");
+    }
+
+    void openSatIntroScene() {
+        Application.LoadLevel("SatIntro");
     }
 
 }
