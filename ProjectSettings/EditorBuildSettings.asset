@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/StartPage.unity
     guid: 05c83cf4305e56a4ea7ae1b8b61466a8
   - enabled: 1
+    path: Assets/Scenes/SatIntro.unity
+    guid: 1d3322ab4d5023a4fa23f6865106ef1d
+  - enabled: 1
     path: Assets/Scenes/TherapyRoom.unity
     guid: 2175672930b4cb54eab65bfb40f5381f
   - enabled: 0

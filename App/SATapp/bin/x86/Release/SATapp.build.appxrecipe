@@ -430,6 +430,9 @@
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\Data\level1">
       <PackagePath>Data\level1</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\Data\level2">
+      <PackagePath>Data\level2</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\Data\Resources\unity default resources">
       <PackagePath>Data\Resources\unity default resources</PackagePath>
     </AppxPackagedFile>
@@ -448,11 +451,17 @@
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\Data\sharedassets1.assets">
       <PackagePath>Data\sharedassets1.assets</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\Data\sharedassets2.assets">
+      <PackagePath>Data\sharedassets2.assets</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\Data\level0.resS">
       <PackagePath>Data\level0.resS</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\Data\level1.resS">
       <PackagePath>Data\level1.resS</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\Data\level2.resS">
+      <PackagePath>Data\level2.resS</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\nman1\Documents\Computing 1718\Individual Project\SATapp\App\SATapp\Data\resources.assets.resS">
       <PackagePath>Data\resources.assets.resS</PackagePath>
