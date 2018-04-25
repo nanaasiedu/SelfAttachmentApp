@@ -840,7 +840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 400072167}
   m_Layer: 0
-  m_Name: Screen
+  m_Name: EmoScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1404,6 +1404,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 689305826}
+  - component: {fileID: 689305827}
   m_Layer: 0
   m_Name: ProtocolManager
   m_TagString: Untagged
@@ -1424,6 +1425,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &689305827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 689305825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0f04d97f0936348a31168131e90487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  child: {fileID: 166448448}
 --- !u!1 &701444140
 GameObject:
   m_ObjectHideFlags: 0

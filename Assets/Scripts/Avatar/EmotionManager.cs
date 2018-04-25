@@ -69,4 +69,16 @@ public class EmotionManager : MonoBehaviour {
             keywordAction.Invoke();
         }
     }
+
+    private void setEmoScreen(bool value) {
+        GameObject EmoScreen = GameObject.Find("EmoScreen");
+
+        if (EmoScreen == null) return;
+
+        EmoScreen.SetActive(value);
+    }
+
+    public void DeactiveEmoScreen() {
+        setEmoScreen(false);
+    }
 }
