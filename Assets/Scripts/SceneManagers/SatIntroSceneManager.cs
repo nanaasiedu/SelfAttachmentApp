@@ -6,12 +6,12 @@ public class SatIntroSceneManager : MonoBehaviour {
 
     private int sceneTimeStep;
     public GameObject infoDialog;
+    public GameObject infoDialog2;
     public GameObject childModel;
-
-    private static int NUM_TEXT_FIRST_STAGE = 2;
 
 	void Start () {
         sceneTimeStep = 0;
+        childModel.SetActive(false);
 	}
 
     void OpenStartPageScene()
@@ -21,12 +21,39 @@ public class SatIntroSceneManager : MonoBehaviour {
     }
 
     void AdvanceScene() {
-        if (sceneTimeStep == NUM_TEXT_FIRST_STAGE)
-        {
-            OpenStartPageScene();
-        }
+        AnimatedText infoDialogAnimatedText = infoDialog.GetComponent<AnimatedText>();
+        AnimatedText infoDialog2AnimatedText = infoDialog2.GetComponent<AnimatedText>();
 
-        infoDialog.SendMessage("AdvanceText");
+        if (infoDialogAnimatedText == null) return;
+        if (infoDialog2AnimatedText == null) return;
+
+        if (infoDialogAnimatedText.TextFinished)
+        {
+            if (sceneTimeStep == infoDialogAnimatedText.NumOfText + 0)
+            {
+                infoDialog.SetActive(false);
+                childModel.SetActive(true);
+
+                sceneTimeStep++;
+                return;
+            }
+            else if (sceneTimeStep == infoDialogAnimatedText.NumOfText + 2)
+            {
+                childModel.SendMessage("setScaredEmotion");
+            }
+            else if (sceneTimeStep == infoDialogAnimatedText.NumOfText + 3)
+            {
+                childModel.SendMessage("setHappyEmotion");
+            }
+            else if (sceneTimeStep == infoDialogAnimatedText.NumOfText + 4) {
+                OpenStartPageScene();
+            }
+
+            infoDialog2AnimatedText.SendMessage("AdvanceText");
+        }
+        else {
+            infoDialogAnimatedText.SendMessage("AdvanceText");
+        }
 
         sceneTimeStep++;
 

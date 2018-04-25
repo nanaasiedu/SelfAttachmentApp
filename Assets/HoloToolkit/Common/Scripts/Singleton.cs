@@ -33,10 +33,13 @@ namespace HoloToolkit.Unity
                     if (objects.Length == 1)
                     {
                         instance = objects[0];
-                        instance.gameObject.GetParentRoot().DontDestroyOnLoad();
+                        //instance.gameObject.GetParentRoot().DontDestroyOnLoad();
                     }
                     else if (objects.Length > 1)
                     {
+                        for (int i = 1; i < objects.Length; i++) {
+                            Destroy(objects[i].gameObject.GetParentRoot());
+                        }
                         Debug.LogErrorFormat("Expected exactly 1 {0} but found {1}.", typeof(T).Name, objects.Length);
                     }
                 }

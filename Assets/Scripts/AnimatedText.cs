@@ -8,15 +8,29 @@ public class AnimatedText : MonoBehaviour {
     public string[] strings;
     public float speed = 0.1f;
 
-    int stringIndex = 0;
-    int charIndex = 0;
+    public int NumOfText {
+        get { return strings.Length; }
+    }
+
+    public bool TextFinished {
+       get { return stringIndex == strings.Length - 1; }
+    }
+
+    private bool started = false;
+    private int stringIndex = 0;
+    private int charIndex = 0;
 
 	// Use this for initialization
 	void Start () {
-        StartCoroutine(DisplayTimer());
+        StartCoroutine(OutputTextSegment());
 	}
 
-    IEnumerator DisplayTimer() {
+    void OnEnable()
+    {
+        StartCoroutine(OutputTextSegment());
+    }
+
+    IEnumerator OutputTextSegment() {
         while (stringIndex < strings.Length) {
             yield return new WaitForSeconds(speed);
 
