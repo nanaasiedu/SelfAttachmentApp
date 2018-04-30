@@ -6,7 +6,7 @@ using HoloToolkit.Unity;
 
 public class TherapyRoomSceneManager : MonoBehaviour
 {
-    void openStartPageScene()
+    public void OpenStartPageScene()
     {
         Application.LoadLevel("StartPage");
     }

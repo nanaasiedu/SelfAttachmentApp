@@ -32,19 +32,19 @@ public class EmotionManager : MonoBehaviour {
 		
 	}
 
-    public void setHappyEmotion() {
+    public void SetHappyEmotion() {
         setEmotion("HAPPY");
     }
 
-    public void setSadEmotion() {
+    public void SetSadEmotion() {
         setEmotion("SAD");
     }
 
-    public void setNeutralEmotion() {
+    public void SetNeutralEmotion() {
         setEmotion("NEUTRAL");
     }
 
-    public void setScaredEmotion() {
+    public void SetScaredEmotion() {
         setEmotion("SCARED");
     }
 

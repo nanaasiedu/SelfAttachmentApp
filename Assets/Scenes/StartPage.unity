@@ -291,7 +291,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4992156184492654, guid: a14a59423f8250d449e336817f140c00, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 28
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4992156184492654, guid: a14a59423f8250d449e336817f140c00, type: 2}
       propertyPath: m_LocalPosition.z
@@ -337,7 +337,7 @@ Prefab:
     - target: {fileID: 102999891068218110, guid: a14a59423f8250d449e336817f140c00,
         type: 2}
       propertyPath: m_Text
-      value: Introduction
+      value: Stage 1
       objectReference: {fileID: 0}
     - target: {fileID: 114776147498804614, guid: a14a59423f8250d449e336817f140c00,
         type: 2}
@@ -436,7 +436,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4992156184492654, guid: a14a59423f8250d449e336817f140c00, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 4992156184492654, guid: a14a59423f8250d449e336817f140c00, type: 2}
       propertyPath: m_LocalPosition.z
@@ -693,7 +693,7 @@ Prefab:
     - target: {fileID: 102999891068218110, guid: a14a59423f8250d449e336817f140c00,
         type: 2}
       propertyPath: m_Text
-      value: Neck Massage
+      value: Stage 2
       objectReference: {fileID: 0}
     - target: {fileID: 114776147498804614, guid: a14a59423f8250d449e336817f140c00,
         type: 2}
@@ -741,7 +741,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1820333246347296, guid: a14a59423f8250d449e336817f140c00, type: 2}
       propertyPath: m_Name
-      value: MassageButton
+      value: Stage2Button
       objectReference: {fileID: 0}
     - target: {fileID: 114210285476315908, guid: a14a59423f8250d449e336817f140c00,
         type: 2}
@@ -773,7 +773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 65646666}
-  targetMethod: performNeckMassageProtocol
+  targetMethod: startStage2
 --- !u!1 &1246618097
 GameObject:
   m_ObjectHideFlags: 0

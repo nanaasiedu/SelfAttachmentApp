@@ -10,9 +10,17 @@ public class StartSceneManager : MonoBehaviour
         loadTherapyRoomScene(ScenesData.ProtocolType.NONE);
     }
 
-    void performNeckMassageProtocol()
+    void startStage2()
     {
-        loadTherapyRoomScene(ScenesData.ProtocolType.MASSAGE);
+        loadTherapyRoomScene(ScenesData.ProtocolType.STAGE_2);
+    }
+
+    void startStage3() {
+        loadTherapyRoomScene(ScenesData.ProtocolType.STAGE_3);
+    }
+
+    void startStage4() {
+        loadTherapyRoomScene(ScenesData.ProtocolType.STAGE_4);
     }
 
     void openSatIntroScene() {

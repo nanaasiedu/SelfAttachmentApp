@@ -6,7 +6,7 @@ using UnityEngine;
 public class AnimatedText : MonoBehaviour {
     public Text textArea;
     public string[] strings;
-    public float speed = 0.1f;
+    public float speed = ScenesData.dialogTextSpeed;
 
     public int NumOfText {
         get { return strings.Length; }

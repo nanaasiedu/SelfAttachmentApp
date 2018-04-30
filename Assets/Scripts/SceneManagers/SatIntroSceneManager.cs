@@ -39,11 +39,11 @@ public class SatIntroSceneManager : MonoBehaviour {
             }
             else if (sceneTimeStep == infoDialogAnimatedText.NumOfText + 2)
             {
-                childModel.SendMessage("setScaredEmotion");
+                childModel.SendMessage("SetScaredEmotion");
             }
             else if (sceneTimeStep == infoDialogAnimatedText.NumOfText + 3)
             {
-                childModel.SendMessage("setHappyEmotion");
+                childModel.SendMessage("SetHappyEmotion");
             }
             else if (sceneTimeStep == infoDialogAnimatedText.NumOfText + 4) {
                 OpenStartPageScene();
