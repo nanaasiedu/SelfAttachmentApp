@@ -24,13 +24,17 @@ public class EmotionManager : MonoBehaviour {
 
         // Register a callback for the KeywordRecognizer and start recognizing!
         keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
-        keywordRecognizer.Start();
+        startKeywordRecognizer();
     }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    public void startKeywordRecognizer() {
+        keywordRecognizer.Start();
+    }
 
     public void SetHappyEmotion() {
         setEmotion("HAPPY");
@@ -46,6 +50,10 @@ public class EmotionManager : MonoBehaviour {
 
     public void SetScaredEmotion() {
         setEmotion("SCARED");
+    }
+
+    public void SetDanceEmotion() {
+        setEmotion("DANCE");
     }
 
     private void setAnimateOnSpeech(string speechCommand, string animationName) {

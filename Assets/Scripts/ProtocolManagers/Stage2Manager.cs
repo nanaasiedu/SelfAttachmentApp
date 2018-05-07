@@ -18,12 +18,24 @@ public class Stage2Manager : MonoBehaviour {
     }
 	
 	void Start () {
+        AnimatedText dialogScreenAnimatedText = dialogScreen.AddComponent<AnimatedText>() as AnimatedText;
+        dialogScreenAnimatedText.strings = new string[6] {
+            "During this stage, you will start to form a connection with your inner-child.",
+            "Your inner-child will become sad during times of distress.",
+            "However, during positive moments in your life your inner-child will express happiness.",
+            "Great! Hopefully you feel more connected with your inner-child.",
+            "Let’s continue this connection by embracing the inner-child.",
+            "Excellent! Now your connection with your inner child has increased"
+        };
+        dialogScreenAnimatedText.enabled = true;
+
         child.SendMessage("DeactiveEmoScreen");
         child.SendMessage("SetSadEmotion");
         dialogScreen.SetActive(true);
     }
 
     public void AdvanceProtocol() {
+        if (!enabled) return;
 
         if (protocolStep == 0)
         {
@@ -89,6 +101,7 @@ public class Stage2Manager : MonoBehaviour {
 
             if (areaManager.InDeadZone)
             {
+                areaManager.showZones();
                 setActionScreenText("You are too close to the inner-child. Please step back");
                 hugProtocolComplete = false;
             }
@@ -100,6 +113,7 @@ public class Stage2Manager : MonoBehaviour {
             }
             else
             {
+                areaManager.showZones();
                 setActionScreenText("Step into the green ring closer to the inner-child");
                 hugProtocolComplete = false;
             }

@@ -1074,7 +1074,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3a75e6cacfc634199b0a2de41032d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textArea: {fileID: 1629238619}
   strings:
   - Here is your inner-child shown as a hologram.
   - You will be performing various protocols with your inner-child through the aid
@@ -3766,6 +3765,26 @@ Prefab:
       propertyPath: targetObject
       value: 
       objectReference: {fileID: 1751199484}
+    - target: {fileID: 224016884721107428, guid: 859c7fa4f2c287b4484784ce351bd023,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224362618461441204, guid: 859c7fa4f2c287b4484784ce351bd023,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224280271394636200, guid: 859c7fa4f2c287b4484784ce351bd023,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224042889111171346, guid: 859c7fa4f2c287b4484784ce351bd023,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 859c7fa4f2c287b4484784ce351bd023, type: 2}
   m_IsPrefabParent: 0

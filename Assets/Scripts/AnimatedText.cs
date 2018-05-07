@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class AnimatedText : MonoBehaviour {
-    public Text textArea;
+    private Text textArea;
     public string[] strings;
     public float speed = ScenesData.dialogTextSpeed;
 
@@ -22,11 +22,13 @@ public class AnimatedText : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        textArea = GetComponentInChildren<Text>();
         StartCoroutine(OutputTextSegment());
 	}
 
     void OnEnable()
     {
+        textArea = GetComponentInChildren<Text>();
         StartCoroutine(OutputTextSegment());
     }
 
