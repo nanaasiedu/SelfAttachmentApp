@@ -7,8 +7,12 @@ public class AreaManager : MonoBehaviour {
     public GameObject hugZone;
     public GameObject deadZone;
     public Transform headTransform;
+    public GameObject childModel;
+    public GameObject warningDialog;
 
     public float Distance { get; private set; }
+
+    private bool shouldDeactivateDeadZone = false;
 
     public bool InDeadZone {
         get {
@@ -35,6 +39,18 @@ public class AreaManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         updateDistance();
+
+        childModel.SetActive(!InDeadZone);
+        warningDialog.SetActive(InDeadZone);
+        if (InDeadZone && !deadZone.active) {
+            showDeadZone();
+            shouldDeactivateDeadZone = true;
+        }
+
+        if (!InDeadZone && shouldDeactivateDeadZone) {
+            hideDeadZone();
+            shouldDeactivateDeadZone = false;
+        }
 	}
 
     private void updateDistance() {

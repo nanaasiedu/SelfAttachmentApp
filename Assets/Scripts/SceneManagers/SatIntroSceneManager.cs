@@ -8,6 +8,7 @@ public class SatIntroSceneManager : MonoBehaviour {
     public GameObject infoDialog;
     public GameObject infoDialog2;
     public GameObject childModel;
+    public GameObject alertDialog;
 
 	void Start () {
         sceneTimeStep = 0;
@@ -39,6 +40,7 @@ public class SatIntroSceneManager : MonoBehaviour {
             }
             else if (sceneTimeStep == infoDialogAnimatedText.NumOfText + 2)
             {
+                alertDialog.SetActive(false);
                 childModel.SendMessage("SetScaredEmotion");
             }
             else if (sceneTimeStep == infoDialogAnimatedText.NumOfText + 3)

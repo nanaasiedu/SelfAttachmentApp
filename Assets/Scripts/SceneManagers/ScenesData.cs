@@ -25,7 +25,21 @@ public static class ScenesData {
     public static float minimumScreenDistance = 2.0f;
     public static float screenSpeed = 1.0f;
 
-    public static int songRate_numberOfWords = 7;
-    public static float songRate_perSecond = 4.0f;
-    public static float songDuration = 20.0f;
+    public static int songRate_numberOfWords = 3;
+    public static float songRate_perSecond = 2.5f;
+    public static float songDuration = 10.0f;
+
+    public static int pledgeRate_numberOfWords = 4;
+    public static float pledgeRate_perSecond = 3.0f;
+    public static float pledgeDuration = 10.0f;
+
+    public static int phraseDetectionLookAhead = 2;
+    public static float phraseDetectionPercentage = 0.6f;
+
+    public static float scanningDuration = 10.0f;
+    public static int minimumHorizontalSurfaces = 1;
+    public static int minimumVerticalSurfaces = 1;
+    public static float childStartDistance = 2.5f;
+    public static float childHeightOffset = -0.1f;
+    public static float childStartPositionCheckAngle = 360.0f / 8.0f;
 }

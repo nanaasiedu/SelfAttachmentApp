@@ -101,18 +101,21 @@ public class Stage2Manager : MonoBehaviour {
 
             if (areaManager.InDeadZone)
             {
+                child.SendMessage("SetNeutralEmotion");
                 areaManager.showZones();
                 setActionScreenText("You are too close to the inner-child. Please step back");
                 hugProtocolComplete = false;
             }
             else if (areaManager.InHugZone)
             {
+                child.SendMessage("SetHappyEmotion");
                 areaManager.hideZones();
                 setActionScreenText("Give yourself a hug while looking at the inner-child and imagine they are in your arms. (Tap to continue)");
                 hugProtocolComplete = true;
             }
             else
             {
+                child.SendMessage("SetNeutralEmotion");
                 areaManager.showZones();
                 setActionScreenText("Step into the green ring closer to the inner-child");
                 hugProtocolComplete = false;

@@ -65,7 +65,7 @@ public class HandsManager : Singleton<HandsManager>
         HandDetected = false;
         FingerDown = false;
 
-        if (FocusedGameObject != null) {
+        if (FocusedGameObject != null && InteractibleManager.Instance.FocusedGameObject != null) {
             FocusedGameObject = InteractibleManager.Instance.FocusedGameObject;
             Interactible interactor = FocusedGameObject.GetComponent<Interactible>();
             if (interactor != null) interactor.Deselect();

@@ -29,6 +29,9 @@ public class MicrophoneManager : MonoBehaviour
     private int numberOfNewWords = 0;
     private string previousRecognisedText = "";
 
+    private Hashtable phraseIdPhraseMap = new Hashtable();
+    private Hashtable phraseIdDetectedMap = new Hashtable();
+
     void Awake()
     {
         dictationRecognizer = new DictationRecognizer();
@@ -94,6 +97,56 @@ public class MicrophoneManager : MonoBehaviour
         }
 
         Microphone.End(deviceName);
+        phraseIdDetectedMap.Clear();
+        phraseIdPhraseMap.Clear();
+    }
+
+    public void detectPhrase(int phraseId, string[] words) {
+        phraseIdPhraseMap.Add(phraseId, words);
+        phraseIdDetectedMap.Add(phraseId, false);
+    }
+
+    public void deletePhrase(int phraseId) {
+        phraseIdPhraseMap.Remove(phraseId);
+        phraseIdDetectedMap.Remove(phraseId);
+    }
+
+    public void resetPhrase(int phraseId) {
+        if (!phraseIdPhraseMap.Contains(phraseId)) return;
+
+        phraseIdDetectedMap[phraseId] = true;
+    }
+
+    public bool isPhraseDetected(int phraseId) {
+        if (!phraseIdDetectedMap.Contains(phraseId)) return false;
+
+        return (bool)phraseIdDetectedMap[phraseId];
+    }
+
+    public void checkPhraseDetection(int phraseId, string[] words) {
+        if (!phraseIdPhraseMap.Contains(phraseId)) return;
+        string[] phrase = (string[])phraseIdPhraseMap[phraseId];
+
+        int phraseIndex = 0;
+        int detectedWords = 0;
+
+        for (int wordsIndex = 0; wordsIndex < words.Length; wordsIndex++) {
+            for (int aheadIndex = 0; aheadIndex < ScenesData.phraseDetectionLookAhead; aheadIndex++)
+            {
+                if (phrase[phraseIndex + aheadIndex].Equals(words[wordsIndex])) {
+                    phraseIndex += 1 + aheadIndex;
+                    detectedWords++;
+                    break;
+                }
+            }
+
+            if (detectedWords / (float)phrase.Length > ScenesData.phraseDetectionPercentage) {
+                phraseIdDetectedMap[phraseId] = true;
+                break;
+            }
+        }
+
+        Debug.Log("Phrase detection finished : " + detectedWords + " detected: " + phraseIdDetectedMap[phraseId]);
     }
 
     /// <summary>
@@ -134,6 +187,13 @@ public class MicrophoneManager : MonoBehaviour
     /// <param name="confidence">A representation of how confident (rejected, low, medium, high) the recognizer is of this recognition.</param>
     private void DictationRecognizer_DictationResult(string text, ConfidenceLevel confidence)
     {
+        char[] delimiter = { ' ', '.' };
+        string[] words = text.Split(delimiter);
+
+        foreach (int phraseId in phraseIdPhraseMap.Keys) {
+            checkPhraseDetection(phraseId, words);
+        }
+
         textSoFar.Append(text + ". ");
 
         previousRecognisedText = "";
@@ -147,6 +207,7 @@ public class MicrophoneManager : MonoBehaviour
     /// <param name="cause">An enumerated reason for the session completing.</param>
     private void DictationRecognizer_DictationComplete(DictationCompletionCause cause)
     {
+        Debug.Log("MICROPHONE COMPLETE: " + cause);
         // If Timeout occurs, the user has been silent for too long.
         // With dictation, the default timeout after a recognition is 20 seconds.
         // The default timeout with initial silence is 5 seconds.
