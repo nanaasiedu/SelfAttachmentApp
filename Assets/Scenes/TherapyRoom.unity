@@ -207,6 +207,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d3c0f6b166156409e3e10e23401c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectsToDestroy:
+  - {fileID: 689305825}
+  - {fileID: 1452274951}
+  - {fileID: 166448448}
+  - {fileID: 602046920}
 --- !u!1 &77330638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,7 +1443,7 @@ MonoBehaviour:
   PhysicsLayer: 31
   surfaceMaterial: {fileID: 2100000, guid: d698790d3facd3d4289a13fa1243030a, type: 2}
   autoStartObserver: 1
-  drawVisualMeshes: 1
+  drawVisualMeshes: 0
   castShadows: 0
 --- !u!114 &602046922
 MonoBehaviour:
@@ -1451,8 +1456,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a98b181acba5549af3d852c7664623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TrianglesPerCubicMeter: 500
-  TimeBetweenUpdates: 3.5
+  TrianglesPerCubicMeter: 100
+  TimeBetweenUpdates: 4
   observerVolumeType: 0
   extents: {x: 10, y: 10, z: 10}
   origin: {x: 0, y: 0, z: 0}
@@ -5415,7 +5420,7 @@ MonoBehaviour:
   ActivePlanes: []
   SurfacePlanePrefab: {fileID: 0}
   MinArea: 0.025
-  drawPlanesMask: -17
+  drawPlanesMask: 0
   destroyPlanesMask: 16
 --- !u!4 &1452274954
 Transform:

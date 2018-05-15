@@ -36,7 +36,7 @@ public static class ScenesData {
     public static int phraseDetectionLookAhead = 2;
     public static float phraseDetectionPercentage = 0.6f;
 
-    public static float scanningDuration = 10.0f;
+    public static float scanningDuration = 7.0f;
     public static int minimumHorizontalSurfaces = 1;
     public static int minimumVerticalSurfaces = 1;
     public static float childStartDistance = 2.5f;

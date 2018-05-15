@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using HoloToolkit.Unity.SpatialMapping;
+using HoloToolkit.Unity;
 
-public class LocationManager : MonoBehaviour {
+public class LocationManager : Singleton<LocationManager>
+{
 
     public bool limitScanningByTime = true;
     private bool meshesProcessed = false;
@@ -14,6 +16,7 @@ public class LocationManager : MonoBehaviour {
     public GameObject child;
     public Transform headTransform;
     public GameObject scanAlertMessage;
+    public Vector3 ChildLocation { get; private set; }
 
     void Start () {
         SurfaceMeshesToPlanes.Instance.MakePlanesComplete += SurfaceMeshesToPlanes_MakePlanesComplete;
@@ -90,8 +93,11 @@ public class LocationManager : MonoBehaviour {
             Vector3 childHeightOffset = Vector3.up * ScenesData.childHeightOffset;
             Vector3 planeThickness = (surfacePlane.PlaneThickness * surfacePlane.SurfaceNormal);
             Vector3 childPosition = childFloorPosition + planeThickness + childHeightOffset;
-            child.transform.position = childPosition;
+            ChildLocation = childPosition;
+            ChildLocationSet = true;
+            child.GetComponent<AreaManager>().ResetPosition();
             child.SetActive(true);
+            protocolManager.SendMessage("StartProtocol");
         }
         else {
             Debug.Log("RAYCAST FAILED");

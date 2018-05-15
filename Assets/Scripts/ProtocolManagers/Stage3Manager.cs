@@ -22,10 +22,17 @@ public class Stage3Manager : MonoBehaviour {
 
     void Awake()
     {
-        enabled = ScenesData.currentProtocol == ScenesData.ProtocolType.STAGE_3;
+        enabled = shouldEnable();
     }
 
     void Start () {
+        if (!LocationManager.Instance.ChildLocationSet) return;
+        StartProtocol();
+    }
+
+    private void StartProtocol() {
+        if (!shouldEnable()) return;
+
         microphoneManager = GetComponent<MicrophoneManager>();
 
         AnimatedText dialogScreenAnimatedText = dialogScreen.AddComponent<AnimatedText>() as AnimatedText;
@@ -242,4 +249,8 @@ public class Stage3Manager : MonoBehaviour {
         actionScreen.SetActive(false);
     }
 
+    private bool shouldEnable()
+    {
+        return ScenesData.currentProtocol == ScenesData.ProtocolType.STAGE_3;
+    }
 }

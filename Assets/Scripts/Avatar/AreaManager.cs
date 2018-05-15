@@ -34,6 +34,8 @@ public class AreaManager : MonoBehaviour {
 
         deadZone.transform.localScale = new Vector3(deadRadius, ScenesData.deadZoneHeight, deadRadius);
         hugZone.transform.localScale = new Vector3(hugRadius, ScenesData.hugZoneHeight, hugRadius);
+
+        ResetPosition();
     }
 	
 	// Update is called once per frame
@@ -89,5 +91,11 @@ public class AreaManager : MonoBehaviour {
     public void hideZones() {
         hideDeadZone();
         hideHugZone();
+    }
+
+    public void ResetPosition()
+    {
+        if (LocationManager.Instance.ChildLocation == null) return;
+        transform.position = LocationManager.Instance.ChildLocation;
     }
 }

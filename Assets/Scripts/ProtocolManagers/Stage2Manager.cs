@@ -14,10 +14,17 @@ public class Stage2Manager : MonoBehaviour {
     private bool hugProtocolComplete = false;
 
     void Awake() {
-        enabled = ScenesData.currentProtocol == ScenesData.ProtocolType.STAGE_2;
+        enabled = shouldEnable();
     }
 	
 	void Start () {
+        if (!LocationManager.Instance.ChildLocationSet) return;
+        StartProtocol();
+    }
+
+    public void StartProtocol() {
+        if (!shouldEnable()) return;
+
         AnimatedText dialogScreenAnimatedText = dialogScreen.AddComponent<AnimatedText>() as AnimatedText;
         dialogScreenAnimatedText.strings = new string[6] {
             "During this stage, you will start to form a connection with your inner-child.",
@@ -141,5 +148,9 @@ public class Stage2Manager : MonoBehaviour {
     private void activateDialogScreen() {
         dialogScreen.SetActive(true);
         actionScreen.SetActive(false);
+    }
+
+    private bool shouldEnable() {
+        return ScenesData.currentProtocol == ScenesData.ProtocolType.STAGE_2;
     }
 }
