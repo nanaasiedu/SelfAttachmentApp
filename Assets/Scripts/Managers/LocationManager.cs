@@ -4,6 +4,7 @@ using UnityEngine;
 
 using HoloToolkit.Unity.SpatialMapping;
 using HoloToolkit.Unity;
+using UnityEngine.UI;
 
 public class LocationManager : Singleton<LocationManager>
 {
@@ -56,13 +57,22 @@ public class LocationManager : Singleton<LocationManager>
         {
             scanAlertMessage.SetActive(false);
             RemoveVertices(SurfaceMeshesToPlanes.Instance.ActivePlanes);
-            placeChildOnFloor(floorPlane);
+            bool success = placeChildOnFloor(floorPlane);
+
+            if (!success)
+            {
+                setAlertText("Currently scanning room: Please make sure you have a clear open space around you");
+                restartScan();
+            }
+            else {
+                child.SetActive(true);
+                protocolManager.SendMessage("StartProtocol");
+            }
         }
         else
         {
             Debug.Log("Failed to find surfaces - restarting search");
-            SpatialMappingManager.Instance.StartObserver();
-            meshesProcessed = false;
+            restartScan();
         }
     }
 
@@ -76,33 +86,39 @@ public class LocationManager : Singleton<LocationManager>
         return null;
     }
 
-    private void placeChildOnFloor(GameObject floorPlane) {
+    private bool placeChildOnFloor(GameObject floorPlane) {
         SurfacePlane surfacePlane = floorPlane.GetComponent<SurfacePlane>();
-
+        float floorYPosition = floorPlane.transform.position.y;
         headTransform.Rotate(-headTransform.localRotation.x, 0, 0);
-        Vector3 childPositionXZ = headTransform.position + ScenesData.childStartDistance * headTransform.forward;
 
-        RaycastHit hitInfo;
-        bool hit = Physics.Raycast(childPositionXZ, Vector3.down, out hitInfo);
+        for (float bearing = 0.0f; bearing < 360.0f; bearing += ScenesData.childStartPositionCheckAngle) {
+            if (bearing != 0.0f) headTransform.Rotate(0, ScenesData.childStartPositionCheckAngle, 0);
+            Vector3 childPositionXZ = headTransform.position + ScenesData.childStartDistance * headTransform.forward;
 
-        if (hit)
-        {
-            Debug.Log("FLOOR RAYCAST DETECTED check : " + (hitInfo.collider == floorPlane.GetComponent<Collider>()));
-            Vector3 childFloorPosition = hitInfo.point;
+            RaycastHit hitInfo;
+            bool hit = Physics.Raycast(childPositionXZ, Vector3.down, out hitInfo);
+            if (!(hit && childPositionRayHitTest(hitInfo.point, floorYPosition))) continue;
 
-            Vector3 childHeightOffset = Vector3.up * ScenesData.childHeightOffset;
-            Vector3 planeThickness = (surfacePlane.PlaneThickness * surfacePlane.SurfaceNormal);
-            Vector3 childPosition = childFloorPosition + planeThickness + childHeightOffset;
-            ChildLocation = childPosition;
-            ChildLocationSet = true;
-            child.GetComponent<AreaManager>().ResetPosition();
-            child.SetActive(true);
-            protocolManager.SendMessage("StartProtocol");
-        }
-        else {
-            Debug.Log("RAYCAST FAILED");
+            setChildPositionAtPoint(hitInfo.point, surfacePlane);
+            Debug.Log("SUCCESS -- CHILD POSITIONED at bearing: " + bearing);
+            return true;
         }
 
+        Debug.Log("FLOOR POSITIONING FAILED");
+        return false;
+
+    }
+
+    private bool childPositionRayHitTest(Vector3 hitPosition, float floorPositionY) {
+        return hitPosition.y - floorPositionY < ScenesData.floorHitAllowance;
+    }
+
+    private void setChildPositionAtPoint(Vector3 childFloorPosition, SurfacePlane surfacePlane) {
+        Vector3 childHeightOffset = Vector3.up * ScenesData.childHeightOffset;
+        Vector3 planeThickness = (surfacePlane.PlaneThickness * surfacePlane.SurfaceNormal);
+        ChildLocation = childFloorPosition + planeThickness + childHeightOffset;
+        ChildLocationSet = true;
+        child.GetComponent<AreaManager>().ResetPosition();
     }
 
     private void CreatePlanes()
@@ -129,5 +145,15 @@ public class LocationManager : Singleton<LocationManager>
         {
             SurfaceMeshesToPlanes.Instance.MakePlanesComplete -= SurfaceMeshesToPlanes_MakePlanesComplete;
         }
+    }
+
+    private void setAlertText(string text) {
+        Text textComponent = scanAlertMessage.GetComponentInChildren<Text>();
+        textComponent.text = text;
+    }
+
+    private void restartScan() {
+        SpatialMappingManager.Instance.StartObserver();
+        meshesProcessed = false;
     }
 }

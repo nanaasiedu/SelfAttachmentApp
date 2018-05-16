@@ -97,5 +97,8 @@ public class AreaManager : MonoBehaviour {
     {
         if (LocationManager.Instance.ChildLocation == null) return;
         transform.position = LocationManager.Instance.ChildLocation;
+
+        hugZone.transform.position = LocationManager.Instance.ChildLocation;
+        deadZone.transform.position = LocationManager.Instance.ChildLocation;
     }
 }

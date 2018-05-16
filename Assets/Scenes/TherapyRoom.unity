@@ -172,7 +172,7 @@ MonoBehaviour:
   MaxGazeDistance: 5
   RaycastLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967291
+    m_Bits: 2147483643
 --- !u!114 &65646670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1456,8 +1456,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a98b181acba5549af3d852c7664623, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TrianglesPerCubicMeter: 100
-  TimeBetweenUpdates: 4
+  TrianglesPerCubicMeter: 300
+  TimeBetweenUpdates: 3.5
   observerVolumeType: 0
   extents: {x: 10, y: 10, z: 10}
   origin: {x: 0, y: 0, z: 0}
@@ -5420,7 +5420,7 @@ MonoBehaviour:
   ActivePlanes: []
   SurfacePlanePrefab: {fileID: 0}
   MinArea: 0.025
-  drawPlanesMask: 0
+  drawPlanesMask: 2
   destroyPlanesMask: 16
 --- !u!4 &1452274954
 Transform:
