@@ -47,6 +47,8 @@ namespace HoloToolkit.Unity
         [Tooltip("Debug draw the planes used to calculate the pointer lock location.")]
         public bool DebugDrawPointerOrientationPlanes;
 
+        public Camera mainCamera;
+
         private GameObject pointer;
 
         private static int frustumLastUpdated = -1;
@@ -70,6 +72,7 @@ namespace HoloToolkit.Unity
             }
 
             pointer = GameObject.Instantiate(PointerPrefab);
+            pointer.layer = LayerMask.NameToLayer("DirectionIndicatorLayer");
 
             // We create the effect of pivoting rotations by parenting the pointer and
             // offsetting its position.
@@ -358,6 +361,14 @@ namespace HoloToolkit.Unity
 
             indicatorVolume[4] = frustumPlanes[4];
             indicatorVolume[5] = frustumPlanes[5];
+        }
+
+        public void HideIndicator() {
+            mainCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("DirectionIndicatorLayer"));
+        }
+
+        public void ShowIndicator() {
+            mainCamera.cullingMask |= (1 << LayerMask.NameToLayer("DirectionIndicatorLayer"));
         }
     }
 }

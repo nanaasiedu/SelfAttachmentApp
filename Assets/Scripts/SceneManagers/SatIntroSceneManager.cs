@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using HoloToolkit.Unity;
+
 public class SatIntroSceneManager : MonoBehaviour {
 
     private int sceneTimeStep;
@@ -9,11 +11,26 @@ public class SatIntroSceneManager : MonoBehaviour {
     public GameObject infoDialog2;
     public GameObject childModel;
     public GameObject alertDialog;
+    public HeadsUpDirectionIndicator directionIndicator;
 
-	void Start () {
+    void Start () {
+        if (!LocationManager.Instance.ChildLocationSet) return;
+        StartProtocol();
+	}
+
+    void Awake()
+    {
+        enabled = shouldEnable();
+    }
+
+    void StartProtocol() {
+        if (!shouldEnable()) return;
+        infoDialog.SetActive(true);
         sceneTimeStep = 0;
         childModel.SetActive(false);
-	}
+        childModel.SendMessage("DeactiveEmoScreen");
+        directionIndicator.HideIndicator();
+    }
 
     void OpenStartPageScene()
     {
@@ -22,6 +39,7 @@ public class SatIntroSceneManager : MonoBehaviour {
     }
 
     void AdvanceScene() {
+        if (!enabled) return;
         AnimatedText infoDialogAnimatedText = infoDialog.GetComponent<AnimatedText>();
         AnimatedText infoDialog2AnimatedText = infoDialog2.GetComponent<AnimatedText>();
 
@@ -33,7 +51,9 @@ public class SatIntroSceneManager : MonoBehaviour {
             if (sceneTimeStep == infoDialogAnimatedText.NumOfText + 0)
             {
                 infoDialog.SetActive(false);
+                infoDialog2.SetActive(true);
                 childModel.SetActive(true);
+                directionIndicator.ShowIndicator();
 
                 sceneTimeStep++;
                 return;
@@ -59,5 +79,10 @@ public class SatIntroSceneManager : MonoBehaviour {
 
         sceneTimeStep++;
 
+    }
+
+    private bool shouldEnable()
+    {
+        return ScenesData.currentProtocol == ScenesData.ProtocolType.STAGE_1;
     }
 }

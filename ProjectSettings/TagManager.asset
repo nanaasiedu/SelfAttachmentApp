@@ -35,7 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - DirectionIndicatorLayer
   - SpatialLayer
   m_SortingLayers:
   - name: Default

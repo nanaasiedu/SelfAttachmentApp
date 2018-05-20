@@ -36,7 +36,6 @@ public class InteractibleManager : Singleton<InteractibleManager>
             {
                 if (FocusedGameObject.GetComponent<Interactible>() != null)
                 {
-                    // 2.c: Send a GazeEntered message to the FocusedGameObject.
                     FocusedGameObject.SendMessage("GazeEntered");
                 }
             }
@@ -49,7 +48,6 @@ public class InteractibleManager : Singleton<InteractibleManager>
         {
             if (oldFocusedGameObject.GetComponent<Interactible>() != null)
             {
-                // 2.c: Send a GazeExited message to the oldFocusedGameObject.
                 oldFocusedGameObject.SendMessage("GazeExited");
             }
         }

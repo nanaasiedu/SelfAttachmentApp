@@ -24,7 +24,7 @@ public class StartSceneManager : MonoBehaviour
     }
 
     void openSatIntroScene() {
-        Application.LoadLevel("SatIntro");
+        loadTherapyRoomScene(ScenesData.ProtocolType.STAGE_1);
     }
 
     private void loadTherapyRoomScene(ScenesData.ProtocolType protocolType) {

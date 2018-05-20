@@ -18,12 +18,14 @@ public class LocationManager : Singleton<LocationManager>
     public Transform headTransform;
     public GameObject scanAlertMessage;
     public Vector3 ChildLocation { get; private set; }
+    public HeadsUpDirectionIndicator directionIndicator;
 
     void Start () {
         SurfaceMeshesToPlanes.Instance.MakePlanesComplete += SurfaceMeshesToPlanes_MakePlanesComplete;
         child.SetActive(false);
         scanAlertMessage.SetActive(true);
         ChildLocationSet = false;
+        directionIndicator.HideIndicator();
     }
 	
 	void Update () {
@@ -48,15 +50,15 @@ public class LocationManager : Singleton<LocationManager>
         List<GameObject> horizontalPlanes = new List<GameObject>();
         List<GameObject> verticalPlanes = new List<GameObject>();
 
-        horizontalPlanes = SurfaceMeshesToPlanes.Instance.GetActivePlanes(PlaneTypes.Table | PlaneTypes.Floor);
+        horizontalPlanes = SurfaceMeshesToPlanes.Instance.GetActivePlanes(PlaneTypes.Floor);
+        Debug.Log("number of floors: " + horizontalPlanes.Count);
         verticalPlanes = SurfaceMeshesToPlanes.Instance.GetActivePlanes(PlaneTypes.Wall);
 
         GameObject floorPlane = findFloorPlane(horizontalPlanes);
 
         if (floorPlane != null)
         {
-            scanAlertMessage.SetActive(false);
-            RemoveVertices(SurfaceMeshesToPlanes.Instance.ActivePlanes);
+            //RemoveVertices(SurfaceMeshesToPlanes.Instance.ActivePlanes);
             bool success = placeChildOnFloor(floorPlane);
 
             if (!success)
@@ -65,6 +67,8 @@ public class LocationManager : Singleton<LocationManager>
                 restartScan();
             }
             else {
+                scanAlertMessage.SetActive(false);
+                directionIndicator.ShowIndicator();
                 child.SetActive(true);
                 protocolManager.SendMessage("StartProtocol");
             }
@@ -92,8 +96,12 @@ public class LocationManager : Singleton<LocationManager>
         headTransform.Rotate(-headTransform.localRotation.x, 0, 0);
 
         for (float bearing = 0.0f; bearing < 360.0f; bearing += ScenesData.childStartPositionCheckAngle) {
+            Debug.Log("Checking Bearing of: " + bearing);
             if (bearing != 0.0f) headTransform.Rotate(0, ScenesData.childStartPositionCheckAngle, 0);
+
             Vector3 childPositionXZ = headTransform.position + ScenesData.childStartDistance * headTransform.forward;
+            if (Physics.Raycast(headTransform.position, headTransform.forward, ScenesData.childStartDistance + ScenesData.childMinDistanceToWall))
+            { Debug.Log("Raycast hits wall/object"); continue; }
 
             RaycastHit hitInfo;
             bool hit = Physics.Raycast(childPositionXZ, Vector3.down, out hitInfo);
@@ -110,7 +118,29 @@ public class LocationManager : Singleton<LocationManager>
     }
 
     private bool childPositionRayHitTest(Vector3 hitPosition, float floorPositionY) {
-        return hitPosition.y - floorPositionY < ScenesData.floorHitAllowance;
+        bool isCloseToFloor = hitPosition.y - floorPositionY < ScenesData.floorHitAllowance;
+        if (!isCloseToFloor) { Debug.Log("HIT too far from floor"); return false; }
+
+        hitPosition.y += ScenesData.childMidHeight;
+        gameObject.transform.position = hitPosition;
+
+        return !colliderHitsMeshes(SpatialMappingManager.Instance.GetMeshes());
+    }
+
+    private bool colliderHitsMeshes(List<Mesh> meshes) {
+        Collider collider = GetComponent<Collider>();
+        
+        foreach (Mesh mesh in meshes) {
+            if (collider.bounds.Intersects(mesh.bounds) && BoundsIsEncapsulated(collider.bounds, mesh.bounds))
+            { Debug.Log("MESH COLLISION DETECTED"); return true; }
+        }
+
+        return false;
+    }
+
+    bool BoundsIsEncapsulated(Bounds Encapsulator, Bounds Encapsulating)
+    {
+        return Encapsulator.Contains(Encapsulating.min) && Encapsulator.Contains(Encapsulating.max);
     }
 
     private void setChildPositionAtPoint(Vector3 childFloorPosition, SurfacePlane surfacePlane) {

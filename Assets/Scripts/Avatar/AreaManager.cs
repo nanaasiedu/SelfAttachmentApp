@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using HoloToolkit.Unity;
+using System;
+
 public class AreaManager : MonoBehaviour {
 
     public GameObject hugZone;
@@ -9,6 +12,8 @@ public class AreaManager : MonoBehaviour {
     public Transform headTransform;
     public GameObject childModel;
     public GameObject warningDialog;
+    public HeadsUpDirectionIndicator directionIndicator;
+    public Camera mainCamera;
 
     public float Distance { get; private set; }
 
@@ -53,6 +58,15 @@ public class AreaManager : MonoBehaviour {
             hideDeadZone();
             shouldDeactivateDeadZone = false;
         }
+
+        if (Math.Abs(Vector3.Angle(transform.position, headTransform.forward)) < 40.0f)
+        {
+            directionIndicator.HideIndicator();
+        }
+        else {
+            directionIndicator.ShowIndicator();
+        }
+
 	}
 
     private void updateDistance() {
@@ -100,5 +114,9 @@ public class AreaManager : MonoBehaviour {
 
         hugZone.transform.position = LocationManager.Instance.ChildLocation;
         deadZone.transform.position = LocationManager.Instance.ChildLocation;
+
+        Vector3 temp = deadZone.transform.position;
+        temp.y += 0.2f;
+        deadZone.transform.position = temp;
     }
 }
