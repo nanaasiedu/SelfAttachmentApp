@@ -2277,6 +2277,7 @@ MonoBehaviour:
   infoDialog2: {fileID: 857900379}
   childModel: {fileID: 166448448}
   alertDialog: {fileID: 1398281228}
+  sceneManager: {fileID: 65646666}
   directionIndicator: {fileID: 385665151}
 --- !u!1 &701444140
 GameObject:
@@ -6208,6 +6209,7 @@ GameObject:
   - component: {fileID: 1398281232}
   - component: {fileID: 1398281231}
   - component: {fileID: 1398281230}
+  - component: {fileID: 1398281233}
   m_Layer: 5
   m_Name: AlertSceen
   m_TagString: Untagged
@@ -6292,6 +6294,17 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1398281233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1398281228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db8f8b6d8c451a642ac7aae629b88ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1399992981
 GameObject:
   m_ObjectHideFlags: 0
@@ -7395,7 +7408,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Look bellow at your inner-child '
+  m_Text: 'Look below at your inner-child '
 --- !u!222 &1663270709
 CanvasRenderer:
   m_ObjectHideFlags: 0

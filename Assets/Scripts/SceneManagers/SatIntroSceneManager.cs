@@ -11,6 +11,7 @@ public class SatIntroSceneManager : MonoBehaviour {
     public GameObject infoDialog2;
     public GameObject childModel;
     public GameObject alertDialog;
+    public GameObject sceneManager;
     public HeadsUpDirectionIndicator directionIndicator;
 
     void Start () {
@@ -32,12 +33,6 @@ public class SatIntroSceneManager : MonoBehaviour {
         directionIndicator.HideIndicator();
     }
 
-    void OpenStartPageScene()
-    {
-        sceneTimeStep = 0;
-        Application.LoadLevel("StartPage");
-    }
-
     void AdvanceScene() {
         if (!enabled) return;
         AnimatedText infoDialogAnimatedText = infoDialog.GetComponent<AnimatedText>();
@@ -51,6 +46,7 @@ public class SatIntroSceneManager : MonoBehaviour {
             if (sceneTimeStep == infoDialogAnimatedText.NumOfText + 0)
             {
                 infoDialog.SetActive(false);
+                alertDialog.SetActive(true);
                 infoDialog2.SetActive(true);
                 childModel.SetActive(true);
                 directionIndicator.ShowIndicator();
@@ -68,7 +64,7 @@ public class SatIntroSceneManager : MonoBehaviour {
                 childModel.SendMessage("SetHappyEmotion");
             }
             else if (sceneTimeStep == infoDialogAnimatedText.NumOfText + 4) {
-                OpenStartPageScene();
+                sceneManager.SendMessage("OpenStartPageScene");
             }
 
             infoDialog2AnimatedText.SendMessage("AdvanceText");
