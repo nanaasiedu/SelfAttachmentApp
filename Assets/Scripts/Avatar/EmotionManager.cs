@@ -65,6 +65,7 @@ public class EmotionManager : MonoBehaviour {
     }
 
     private void setEmotion(string animationName) {
+        if (animator == null) animator = GetComponent<Animator>();
         animator.Play(animationName, -1, 0f);
     }
 

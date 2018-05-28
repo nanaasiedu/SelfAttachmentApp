@@ -113,10 +113,9 @@ public class AreaManager : MonoBehaviour {
         transform.position = LocationManager.Instance.ChildLocation;
 
         hugZone.transform.position = LocationManager.Instance.ChildLocation;
-        deadZone.transform.position = LocationManager.Instance.ChildLocation;
 
-        Vector3 temp = deadZone.transform.position;
-        temp.y += 0.2f;
+        Vector3 temp = LocationManager.Instance.ChildLocation;
+        temp.y += 0.01f;
         deadZone.transform.position = temp;
     }
 }

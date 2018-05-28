@@ -49,6 +49,7 @@ public class SatIntroSceneManager : MonoBehaviour {
                 alertDialog.SetActive(true);
                 infoDialog2.SetActive(true);
                 childModel.SetActive(true);
+                childModel.SendMessage("DeactiveEmoScreen");
                 directionIndicator.ShowIndicator();
 
                 sceneTimeStep++;

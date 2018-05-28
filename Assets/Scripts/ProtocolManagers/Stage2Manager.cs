@@ -31,7 +31,7 @@ public class Stage2Manager : MonoBehaviour {
             "Your inner-child will become sad during times of distress.",
             "However, during positive moments in your life your inner-child will express happiness.",
             "Great! Hopefully you feel more connected with your inner-child.",
-            "Let’s continue this connection by embracing the inner-child.",
+            "Let’s continue improve this connection. Embracing your inner-child is a great way to do this.",
             "Excellent! Now your connection with your inner child has increased"
         };
         dialogScreenAnimatedText.enabled = true;

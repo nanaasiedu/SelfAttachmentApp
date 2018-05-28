@@ -59,12 +59,7 @@ public class MicrophoneManager : MonoBehaviour
     {
         if (hasRecordingStarted && !Microphone.IsRecording(deviceName) && dictationRecognizer.Status == SpeechSystemStatus.Running)
         {
-            // Reset the flag now that we're cleaning up the UI.
             hasRecordingStarted = false;
-
-            // This acts like pressing the Stop button and sends the message to the Communicator.
-            // If the microphone stops as a result of timing out, make sure to manually stop the dictation recognizer.
-            // Look at the StopRecording function.
             SendMessage("RecordStop");
         }
     }
@@ -83,7 +78,7 @@ public class MicrophoneManager : MonoBehaviour
 
         hasRecordingStarted = true;
 
-        return Microphone.Start(deviceName, false, messageLength, samplingRate);
+        return Microphone.Start(deviceName, true, messageLength, samplingRate);
     }
 
     /// <summary>
@@ -208,16 +203,7 @@ public class MicrophoneManager : MonoBehaviour
     private void DictationRecognizer_DictationComplete(DictationCompletionCause cause)
     {
         Debug.Log("MICROPHONE COMPLETE: " + cause);
-        // If Timeout occurs, the user has been silent for too long.
-        // With dictation, the default timeout after a recognition is 20 seconds.
-        // The default timeout with initial silence is 5 seconds.
-        if (cause == DictationCompletionCause.TimeoutExceeded)
-        {
-            Microphone.End(deviceName);
-
-            dictationDisplay.text = "Dictation has timed out. Please press the record button again.";
-            SendMessage("ResetAfterTimeout");
-        }
+        dictationRecognizer.Start();
     }
 
     /// <summary>

@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartPage.unity
     guid: 05c83cf4305e56a4ea7ae1b8b61466a8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SatIntro.unity
     guid: 1d3322ab4d5023a4fa23f6865106ef1d
   - enabled: 1
@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/unityChanDemo.unity
     guid: 2995549914645cc48be27d17257e51b7
+  - enabled: 0
+    path: Assets/Scenes/OldTherapyRoom.unity
+    guid: a713808f281bcff41aa8357b169debec

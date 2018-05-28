@@ -48,8 +48,8 @@ public class Stage3Manager : MonoBehaviour {
             "Now let's revisit our soothing song... we can sing this song when we are in times of stress to remind us of the importance of comforting our inner-child. Slowly moving our body to the rhytm also helps with this exercise.",
             "Hence we must practice comfortably and intutively singing this song often to remind you of your connection to your inner-child and help you feel the happiness associated with the song",
             "Excellent!!!, your song has made your inner-child much happier",
-            "It is very important that you remember to sing this song whenever you feel distressed. It will remind you of your loving bond with your inner-child who you want to feel the happiness associated with song. Practice singing to your inner-child until the action becomes intuitive and natural.",
-            "Now to complete this stage... We must practice reciting important phrases to our inner-child.",
+            "It is very important that you remember to sing this song whenever you feel distressed. It will remind you of your loving bond with your inner-child who you want to feel the happiness associated with song.",
+            "Practice singing to your inner-child until the action becomes intuitive and natural. Now to complete this stage... We must practice reciting important phrases to our inner-child.",
             "Excellent!!! continue to practice these activities continuously so you can use them to improve your mood in connection with your inner-child."
 
         };
@@ -193,7 +193,7 @@ public class Stage3Manager : MonoBehaviour {
             float percentageComplete = elapsedTime / (sadProtocol ? ScenesData.songDuration*2 : ScenesData.songDuration);
 
             if (sadProtocol && percentageComplete < 0.2) {
-                child.SendMessage("SetNeutralProtocl");
+                child.SendMessage("SetNeutralEmotion");
             }
 
             if (percentageComplete < 0.4)

@@ -20,7 +20,7 @@ public static class ScenesData {
     public static float hugZoneRadius = 1.3f;
     public static float deadZoneHeight = 0.01f;
     public static float hugZoneHeight = 0.005f;
-    public static float zoneBoundary = 0.2f;
+    public static float zoneBoundary = -0.1f;
 
     public static float minimumScreenDistance = 2.0f;
     public static float screenSpeed = 1.0f;
@@ -43,8 +43,8 @@ public static class ScenesData {
 
     public static float childStartDistance = 2.0f;
     public static float childHeightOffset = -0.1f;
-    public static float childStartPositionCheckAngle = 360.0f / 16.0f;
-    public static float floorHitAllowance = 0.2f;
+    public static float childStartPositionCheckAngle = 360.0f / 32.0f;
+    public static float floorHitAllowance = 0.4f;
     public static float childMidHeight = 0.6f + 0.4f;
-    public static float childMinDistanceToWall = 0.8f;
+    public static float childMinDistanceToWall = 0.4f;
 }
