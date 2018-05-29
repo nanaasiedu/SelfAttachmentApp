@@ -99,19 +99,38 @@ public class LocationManager : Singleton<LocationManager>
     private bool placeChildOnFloor(GameObject floorPlane) {
         SurfacePlane surfacePlane = floorPlane.GetComponent<SurfacePlane>();
         float floorYPosition = floorPlane.transform.position.y;
-        headTransform.Rotate(-headTransform.localRotation.x, 0, 0);
+
+        Vector3 headPosition = headTransform.position;
+        //Vector3 headForward = Quaternion.Euler(-headTransform.rotation.x, 0, -headTransform.rotation.z) * headTransform.forward;
+        int x = 0;
+        headTransform.rotation = new Quaternion(0, headTransform.rotation.y, 0, 1);
+        Vector3 headForward = headTransform.forward;
 
         for (float bearing = 0.0f; bearing < 360.0f; bearing += ScenesData.childStartPositionCheckAngle) {
             Debug.Log("Checking Bearing of: " + bearing);
-            if (bearing != 0.0f) headTransform.Rotate(0, ScenesData.childStartPositionCheckAngle, 0);
+            if (bearing != 0.0f) headForward = Quaternion.Euler(0, ScenesData.childStartPositionCheckAngle, 0) * headForward;
 
-            Vector3 childPositionXZ = headTransform.position + ScenesData.childStartDistance * headTransform.forward;
-            if (Physics.Raycast(headTransform.position, headTransform.forward, ScenesData.childStartDistance + ScenesData.childMinDistanceToWall))
-            { Debug.Log("Raycast hits wall/object"); continue; }
+            Vector3 childPositionXZ = headPosition + ScenesData.childStartDistance * headForward;
+
+            
+            if (Physics.Raycast(headPosition, headForward, ScenesData.childStartDistance + ScenesData.childMinDistanceToWall))
+            {
+                Debug.Log("Raycast hits wall/object");
+                debug_DrawLine(headPosition, headForward, ScenesData.childStartDistance + ScenesData.childMinDistanceToWall, false);
+                continue;
+            }
+            debug_DrawLine(headPosition, headForward, ScenesData.childStartDistance + ScenesData.childMinDistanceToWall, true);
 
             RaycastHit hitInfo;
             bool hit = Physics.Raycast(childPositionXZ, Vector3.down, out hitInfo);
-            if (!(hit && childPositionRayHitTest(hitInfo.point, floorYPosition))) continue;
+
+            Vector3 directionVector = hitInfo.normal * 1;
+            Debug.DrawRay(hitInfo.point, directionVector, Color.blue, 100, true);
+            if (!(hit && childPositionRayHitTest(hitInfo.point, floorYPosition))) {
+                debug_DrawLine(childPositionXZ, Vector3.down, headPosition.y - hitInfo.point.y, false);
+                continue;
+            }
+            debug_DrawLine(childPositionXZ, Vector3.down, headPosition.y - hitInfo.point.y, true);
 
             setChildPositionAtPoint(hitInfo.point, surfacePlane);
             Debug.Log("SUCCESS -- CHILD POSITIONED at bearing: " + bearing);
@@ -121,6 +140,11 @@ public class LocationManager : Singleton<LocationManager>
         Debug.Log("FLOOR POSITIONING FAILED");
         return false;
 
+    }
+
+    private void debug_DrawLine(Vector3 position, Vector3 direction, float distance, bool success) {
+        Vector3 directionVector = direction * distance;
+        Debug.DrawRay(position, directionVector, success ? Color.green : Color.red, 100, true);
     }
 
     private bool childPositionRayHitTest(Vector3 hitPosition, float floorPositionY) {

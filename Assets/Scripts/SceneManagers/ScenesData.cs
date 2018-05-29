@@ -43,8 +43,8 @@ public static class ScenesData {
 
     public static float childStartDistance = 2.0f;
     public static float childHeightOffset = -0.1f;
-    public static float childStartPositionCheckAngle = 360.0f / 32.0f;
+    public static float childStartPositionCheckAngle = 360.0f / 16.0f;
     public static float floorHitAllowance = 0.4f;
-    public static float childMidHeight = 0.6f + 0.4f;
+    public static float childMidHeight = 0.6f - 0.3f;
     public static float childMinDistanceToWall = 0.4f;
 }
