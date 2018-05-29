@@ -19,18 +19,10 @@ public class EmotionManager : MonoBehaviour {
         setAnimateOnSpeech("happy", "HAPPY");
         setAnimateOnSpeech("angry", "ANGRY");
 
-        // Tell the KeywordRecognizer about our keywords.
         keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
-
-        // Register a callback for the KeywordRecognizer and start recognizing!
         keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
-        startKeywordRecognizer();
+        //startKeywordRecognizer();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void startKeywordRecognizer() {
         keywordRecognizer.Start();

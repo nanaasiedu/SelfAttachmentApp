@@ -19,6 +19,7 @@ public class LocationManager : Singleton<LocationManager>
     public GameObject scanAlertMessage;
     public Vector3 ChildLocation { get; private set; }
     public HeadsUpDirectionIndicator directionIndicator;
+    public KeywordManager keywordManager;
 
     void Start () {
         SurfaceMeshesToPlanes.Instance.MakePlanesComplete += SurfaceMeshesToPlanes_MakePlanesComplete;
@@ -67,10 +68,7 @@ public class LocationManager : Singleton<LocationManager>
                 restartScan();
             }
             else {
-                scanAlertMessage.SetActive(false);
-                directionIndicator.ShowIndicator();
-                child.SetActive(true);
-                protocolManager.SendMessage("StartProtocol");
+                activateProtocol();
             }
         }
         else
@@ -78,6 +76,14 @@ public class LocationManager : Singleton<LocationManager>
             Debug.Log("Failed to find surfaces - restarting search");
             restartScan();
         }
+    }
+
+    private void activateProtocol() {
+        scanAlertMessage.SetActive(false);
+        directionIndicator.ShowIndicator();
+        child.SetActive(true);
+        keywordManager.startKeywordRecognizer();
+        protocolManager.SendMessage("StartProtocol");
     }
 
     private GameObject findFloorPlane(List<GameObject> horizontalPlanes) {

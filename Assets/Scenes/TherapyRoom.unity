@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 65646670}
   - component: {fileID: 65646672}
   - component: {fileID: 65646673}
+  - component: {fileID: 65646671}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -263,6 +264,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FingerPressedSound: {fileID: 0}
+--- !u!114 &65646671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 65646666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c40f3e4bf770047a0d6088580aff21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  protocolManager: {fileID: 689305825}
+  handsManager: {fileID: 65646670}
 --- !u!114 &65646672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2233,6 +2247,7 @@ MonoBehaviour:
   headTransform: {fileID: 926538765}
   scanAlertMessage: {fileID: 1127094462}
   directionIndicator: {fileID: 361844658}
+  keywordManager: {fileID: 65646671}
 --- !u!136 &602046925
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2798,6 +2813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dictationDisplay: {fileID: 689305826}
+  keywordManager: {fileID: 65646671}
 --- !u!222 &689305830
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2838,7 +2854,7 @@ MonoBehaviour:
   childModel: {fileID: 166448448}
   alertDialog: {fileID: 1398281228}
   sceneManager: {fileID: 65646666}
-  directionIndicator: {fileID: 0}
+  directionIndicator: {fileID: 361844658}
 --- !u!114 &689305833
 MonoBehaviour:
   m_ObjectHideFlags: 0

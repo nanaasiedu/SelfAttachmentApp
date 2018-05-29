@@ -32,6 +32,8 @@ public class MicrophoneManager : MonoBehaviour
     private Hashtable phraseIdPhraseMap = new Hashtable();
     private Hashtable phraseIdDetectedMap = new Hashtable();
 
+    public KeywordManager keywordManager;
+
     void Awake()
     {
         dictationRecognizer = new DictationRecognizer();
@@ -77,7 +79,6 @@ public class MicrophoneManager : MonoBehaviour
         dictationDisplay.text = "Dictation is starting. It may take time to display your text the first time, but begin speaking now...";
 
         hasRecordingStarted = true;
-
         return Microphone.Start(deviceName, true, messageLength, samplingRate);
     }
 
@@ -91,6 +92,7 @@ public class MicrophoneManager : MonoBehaviour
             dictationRecognizer.Stop();
         }
 
+        Debug.Log("Ending microphone");
         Microphone.End(deviceName);
         phraseIdDetectedMap.Clear();
         phraseIdPhraseMap.Clear();
@@ -203,7 +205,11 @@ public class MicrophoneManager : MonoBehaviour
     private void DictationRecognizer_DictationComplete(DictationCompletionCause cause)
     {
         Debug.Log("MICROPHONE COMPLETE: " + cause);
-        dictationRecognizer.Start();
+        if (cause == DictationCompletionCause.TimeoutExceeded) {
+            dictationRecognizer.Start();
+            return;
+        };
+        PhraseRecognitionSystem.Restart();
     }
 
     /// <summary>
