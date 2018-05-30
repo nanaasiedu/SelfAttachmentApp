@@ -154,7 +154,7 @@ public class LocationManager : Singleton<LocationManager>
         hitPosition.y += ScenesData.childMidHeight;
         gameObject.transform.position = hitPosition;
 
-        return !colliderHitsMeshes(SpatialMappingManager.Instance.GetMeshes());
+        return rayCastBomb(hitPosition);
     }
 
     private bool colliderHitsMeshes(List<Mesh> meshes) {
@@ -165,7 +165,34 @@ public class LocationManager : Singleton<LocationManager>
             { Debug.Log("MESH COLLISION DETECTED"); return true; }
         }
 
+        Debug.Log("PASSED MESH TEST");
         return false;
+    }
+
+    private bool rayCastBomb(Vector3 floorPosition) {
+        Vector3 currDir = Vector3.forward;
+        Vector3 scanPosition = floorPosition + Vector3.up * ScenesData.offGroundBombStartHeight;
+
+        for (float bearing = 0.0f; bearing < 360.0f; bearing += ScenesData.bombScanCheckAngle)
+        {
+            if (bearing != 0.0f) currDir = Quaternion.Euler(0, ScenesData.bombScanCheckAngle, 0) * currDir;
+
+            for (int scanIteration = 0; scanIteration < ScenesData.numberOfBombScans; scanIteration++) {
+                float currDistance = ScenesData.bombScanStartDistance + scanIteration * ScenesData.bombScanSeperation;
+                Vector3 currPosition = scanPosition + currDir * currDistance;
+                float scanDistance = ScenesData.childHeight - ScenesData.offGroundBombStartHeight;
+
+                Vector3 directionVector = Vector3.up * scanDistance;
+                Debug.DrawRay(currPosition, directionVector, Color.yellow, 100, true);
+
+                if (Physics.Raycast(currPosition, Vector3.up, scanDistance)) {
+                    Debug.Log("BOMB SCAN FAILED");
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     bool BoundsIsEncapsulated(Bounds Encapsulator, Bounds Encapsulating)
