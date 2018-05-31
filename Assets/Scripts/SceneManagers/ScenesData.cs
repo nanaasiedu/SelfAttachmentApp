@@ -36,23 +36,23 @@ public static class ScenesData {
     public static int phraseDetectionLookAhead = 2;
     public static float phraseDetectionPercentage = 0.6f;
 
-    private static int numberOfScans = 3;
-    public static float scanningDuration = 3.5f * numberOfScans + 1.0f;
+    private static int numberOfScans = 6;
+    public static float scanningDuration = 1.5f * numberOfScans;
     public static int minimumHorizontalSurfaces = 1;
     public static int minimumVerticalSurfaces = 1;
 
     public static float childStartDistance = 2.0f;
     public static float childHeightOffset = -0.1f;
-    public static float childStartPositionCheckAngle = 360.0f / 16.0f;
-    public static float floorHitAllowance = 0.4f;
+    public static float childStartPositionCheckAngle = 360.0f / 32.0f;
+    public static float floorHitAllowance = 0.35f;
     public static float childMidHeight = 0.6f - 0.3f;
     public static float childMinDistanceToWall = 0.5f;
 
-    public static float childHeight = 1.1f;
-    public static float offGroundBombStartHeight = -0.05f;
+    public static float childHeight = 0.9f;
+    public static float offGroundBombStartHeight = 1f;
     public static float bombScanStartDistance = 0.01f;
-    public static int numberOfBombScans = 15;
+    public static int numberOfBombScans = 14;
     public static float bombScanSeperation = 0.02f;//(bombScanCheckDistance - bombScanStartDistance) / (numberOfBombScans - 1);
-    public static float bombScanCheckAngle = 360.0f / 20.0f;
-    public static float bombScanCheckDistance = 10f;
+    public static float bombScanCheckAngle = 360.0f / 8.0f;
+    //public static float bombScanCheckDistance = 10f;
 }

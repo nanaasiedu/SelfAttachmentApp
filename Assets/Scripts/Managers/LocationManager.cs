@@ -74,6 +74,7 @@ public class LocationManager : Singleton<LocationManager>
         else
         {
             Debug.Log("Failed to find surfaces - restarting search");
+            setAlertText("Currently scanning room: Be sure to scan the floor!");
             restartScan();
         }
     }
@@ -171,7 +172,7 @@ public class LocationManager : Singleton<LocationManager>
 
     private bool rayCastBomb(Vector3 floorPosition) {
         Vector3 currDir = Vector3.forward;
-        Vector3 scanPosition = floorPosition + Vector3.up * ScenesData.offGroundBombStartHeight;
+        Vector3 scanPosition = floorPosition + Vector3.up * (ScenesData.offGroundBombStartHeight + ScenesData.childHeightOffset);
 
         for (float bearing = 0.0f; bearing < 360.0f; bearing += ScenesData.bombScanCheckAngle)
         {
