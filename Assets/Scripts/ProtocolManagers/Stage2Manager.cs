@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HoloToolkit.Unity;
 
 public class Stage2Manager : MonoBehaviour {
 
@@ -26,6 +27,7 @@ public class Stage2Manager : MonoBehaviour {
         if (!shouldEnable()) return;
 
         AnimatedText dialogScreenAnimatedText = dialogScreen.AddComponent<AnimatedText>() as AnimatedText;
+        dialogScreenAnimatedText.textToSpeech = sceneManager.GetComponent<TextToSpeech>();
         dialogScreenAnimatedText.strings = new string[6] {
             "During this stage, you will start to form a connection with your inner-child.",
             "Your inner-child will become sad during times of distress.",

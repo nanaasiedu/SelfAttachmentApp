@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HoloToolkit.Unity;
 
 public class Stage3Manager : MonoBehaviour {
 
@@ -36,6 +37,7 @@ public class Stage3Manager : MonoBehaviour {
         microphoneManager = GetComponent<MicrophoneManager>();
 
         AnimatedText dialogScreenAnimatedText = dialogScreen.AddComponent<AnimatedText>() as AnimatedText;
+        dialogScreenAnimatedText.textToSpeech = sceneManager.GetComponent<TextToSpeech>();
         dialogScreenAnimatedText.strings = new string[] {
             "Now you will perform exercises which will help you form and maintain a loving relationship with your inner-child.",
             "Now you feel better connected with your inner-child...",

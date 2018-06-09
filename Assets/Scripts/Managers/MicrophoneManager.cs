@@ -32,8 +32,6 @@ public class MicrophoneManager : MonoBehaviour
     private Hashtable phraseIdPhraseMap = new Hashtable();
     private Hashtable phraseIdDetectedMap = new Hashtable();
 
-    public KeywordManager keywordManager;
-
     void Awake()
     {
         dictationRecognizer = new DictationRecognizer();

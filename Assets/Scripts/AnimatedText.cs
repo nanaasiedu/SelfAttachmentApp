@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using HoloToolkit.Unity;
 
 public class AnimatedText : MonoBehaviour {
     private Text textArea;
     public string[] strings;
     public float speed = ScenesData.dialogTextSpeed;
+    public TextToSpeech textToSpeech;
 
     public int NumOfText {
         get { return strings.Length; }
@@ -22,9 +24,11 @@ public class AnimatedText : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        if (stringIndex < strings.Length) playTextAudio(strings[stringIndex]);
         textArea = GetComponentInChildren<Text>();
         StartCoroutine(OutputTextSegment());
-	}
+
+    }
 
     void OnEnable()
     {
@@ -52,5 +56,11 @@ public class AnimatedText : MonoBehaviour {
 
         stringIndex++;
         charIndex = 0;
+
+        if (stringIndex < strings.Length) playTextAudio(strings[stringIndex]);
+    }
+
+    void playTextAudio(string text) {
+        textToSpeech.StartSpeaking(text);
     }
 }

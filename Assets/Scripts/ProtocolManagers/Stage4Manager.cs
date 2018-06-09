@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using HoloToolkit.Unity;
 
 public class Stage4Manager : MonoBehaviour {
 
@@ -14,6 +15,12 @@ public class Stage4Manager : MonoBehaviour {
     public Sprite gestaltVaseImage;
     public Sprite gestaltFaceImage;
 
+    public GameObject carpetPrefab;
+    public GameObject plantPrefab;
+    public GameObject plantPotPrefab;
+    public GameObject chandelierPrefab;
+    public GameObject portraitPrefab;
+
     private IEnumerator hugProtocolCoroutine;
     private bool hugProtocolComplete = false;
 
@@ -25,9 +32,16 @@ public class Stage4Manager : MonoBehaviour {
     private IEnumerator songProtocolCoroutine;
     private bool songDetected = false;
 
+    private bool eyesClocsedComplete = false;
+    private IEnumerator eyeClosedProtocolCoroutine;
+    private static float eyesCloseDuration = 5;
+
     private int protocolStep = 0;
     private int typeAProtocolStart = 0;
     private int typeDProtocolStart = 10;
+    private int typeFProtocolStart = 20;
+
+    
 
     void Awake()
     {
@@ -47,6 +61,7 @@ public class Stage4Manager : MonoBehaviour {
         microphoneManager = GetComponent<MicrophoneManager>();
 
         AnimatedText dialogScreenAnimatedText = dialogScreen.AddComponent<AnimatedText>() as AnimatedText;
+        dialogScreenAnimatedText.textToSpeech = sceneManager.GetComponent<TextToSpeech>();
         dialogScreenAnimatedText.strings = new string[] {
             "Through the previous stages we have learnt exercises to strengthen our attachment to our inner-child.",
             "Using the bond you have developed with your child, these exercises can be used to calm your inner-child's emotional state when you experience trauma due to past events.",
@@ -63,7 +78,17 @@ public class Stage4Manager : MonoBehaviour {
             "Once this is achieved, we can disassociate the dark emotions from the image and start to see new possibilites...",
             "Look at the new red outline, you should be able to make out two white faces!",
             "These white faces represent our adult-self and inner-child looking at each other in a loving relationship",
-            "We tend to see thing from different perspectives depending on our emotions"
+            "We tend to see thing from different perspectives depending on our emotions",
+
+            "Finally, through performing these protocols to increase positive affects and contain the inner-child's negative thoughts and emotions...",
+            "we start to realise these feelings stem from our negative past experiences e.g. toxic parental relationships.",
+            "But as you continue to reduce these negative emotions, you and your inner-child can sense the growth in your emotional maturity and you no longer...",
+            "have to see yourself as a scared prisoner of your past. You can now rely on your loving relationship with your inner-child to escape your struggles.",
+            "Your cooperation with your inner child can be represented as a new and beautiful house with beautiful scenery...",
+            "We can use the HoloLens to make this scenery a reality...",
+            "Now look around your enhanced augmented environment!",
+            "The chandelier has brighten up your room! The light and the beautiful new scenery is based on your new secure attachment with your inner child",
+            "As your bond with your inner-child increases... think of this bright scenery to help remind you of your attachment."
         };
         dialogScreenAnimatedText.enabled = true;
 
@@ -77,6 +102,7 @@ public class Stage4Manager : MonoBehaviour {
 
         if (!typeAProtocol()) return;
         if (!typeDProtocol()) return;
+        if (!typeFProtocol()) return;
 
         protocolStep++;
     }
@@ -205,6 +231,38 @@ public class Stage4Manager : MonoBehaviour {
         return true;
     }
 
+    private bool typeFProtocol() {
+        if (protocolStep < typeFProtocolStart + 0) return true;
+
+        if (protocolStep <= typeFProtocolStart + 5)
+        {
+            child.SendMessage("SetNeutralEmotion");
+            dialogScreen.SendMessage("AdvanceText");
+        }
+        else if (protocolStep <= typeFProtocolStart + 6)
+        {
+            activateActionScreen("Close your eyes for 5 seconds...");
+            eyeClosedProtocolCoroutine = eyeCloseProtocol();
+            StartCoroutine(eyeClosedProtocolCoroutine);
+        }
+        else if (protocolStep <= typeFProtocolStart + 7)
+        {
+            if (!eyesClocsedComplete) return false;
+            StopCoroutine(eyeClosedProtocolCoroutine);
+
+            child.SendMessage("SetHappyEmotion");
+            activateDialogScreen();
+            dialogScreen.SendMessage("AdvanceText");
+
+            transformRoom();
+        }
+        else if (protocolStep <= typeFProtocolStart + 8) {
+            sceneManager.SendMessage("OpenStartPageScene");
+        }
+
+        return true;
+    }
+
     IEnumerator hugProtocol()
     {
         while (true)
@@ -284,6 +342,13 @@ public class Stage4Manager : MonoBehaviour {
         }
     }
 
+    IEnumerator eyeCloseProtocol() {
+        yield return new WaitForSeconds(eyesCloseDuration);
+        eyesClocsedComplete = true;
+        AdvanceProtocol();
+
+    }
+
     private void activateActionScreen(string message)
     {
         dialogScreen.SetActive(false);
@@ -330,5 +395,46 @@ public class Stage4Manager : MonoBehaviour {
         gestaltscreen.SetActive(false);
     }
 
+    private void transformRoom() {
+        placeCarpet();
+        placePlants();
+        placeChandelier();
+        placePlantPot();
+        placePortrait();
+    }
 
+    private void placeCarpet() {
+        GameObject carpet = (GameObject)Instantiate(carpetPrefab);
+        carpet.transform.position = LocationManager.Instance.CarpetLocation;
+        carpet.transform.localScale = new Vector3(ScenesData.carpetScale, ScenesData.carpetScale, ScenesData.carpetScale);
+    }
+
+    private void placePlants() {
+        for (int i = 0; i < ScenesData.numberOfFloorObjects; i++)
+        {
+            GameObject plantObj = ((GameObject)Instantiate(plantPrefab));
+            plantObj.transform.position = LocationManager.Instance.generateFloorPosition;
+            plantObj.transform.localScale = new Vector3(ScenesData.plantScale, ScenesData.plantScale, ScenesData.plantScale);
+        }
+    }
+
+    private void placeChandelier() {
+        GameObject chandelier = (GameObject)Instantiate(chandelierPrefab);
+        chandelier.transform.position = LocationManager.Instance.ChandelierPosition;
+        chandelier.transform.localScale = new Vector3(ScenesData.chandelierScale, ScenesData.chandelierScale, ScenesData.chandelierScale);
+        Light lightComponent = chandelier.AddComponent<Light>();
+        lightComponent.type = LightType.Directional;
+    }
+
+    private void placePlantPot() {
+        GameObject plantPot = (GameObject)Instantiate(plantPotPrefab);
+        plantPot.transform.position = LocationManager.Instance.PlantPotPosition;
+    }
+
+    private void placePortrait() {
+        GameObject portrait = portraitPrefab;
+        portrait.SetActive(true);
+        portrait.transform.position = LocationManager.Instance.wallPortraitPosition;
+        portrait.transform.forward = LocationManager.Instance.wallPortraitNormal;
+    }
 }
