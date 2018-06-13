@@ -223,7 +223,7 @@ public class LocationManager : Singleton<LocationManager>
             RaycastHit hitInfo;
             if (Physics.Raycast(headPosition, headForward, out hitInfo, ScenesData.childStartDistance + ScenesData.childMinDistanceToWall))
             {
-                if (debugOn) debug_sphere(hitInfo.point, wallFailMaterial);
+                if (debugOn) debug_sphere(hitInfo.point, wallFailMaterial); reveal_collider(hitInfo.collider); ;
                 Debug.Log("Raycast hits wall/object");
                 debug_DrawLine(headPosition, headForward, ScenesData.childStartDistance + ScenesData.childMinDistanceToWall, false);
                 continue;
@@ -235,6 +235,7 @@ public class LocationManager : Singleton<LocationManager>
             Vector3 directionVector = hitInfo.normal;
             Debug.DrawRay(hitInfo.point, directionVector, Color.blue, 100, true);
             if (!(hit && childPositionRayHitTest(hitInfo.point, floorYPosition))) {
+                if (debugOn) reveal_collider(hitInfo.collider);
                 debug_DrawLine(childPositionXZ, Vector3.down, headPosition.y - hitInfo.point.y, false);
                 continue;
             }
@@ -296,7 +297,7 @@ public class LocationManager : Singleton<LocationManager>
 
                 RaycastHit hitInfo;
                 if (Physics.Raycast(currPosition, Vector3.up, out hitInfo, scanDistance)) {
-                    if (debugOn) debug_sphere(hitInfo.point, bombFailMaterial);
+                    if (debugOn) debug_sphere(hitInfo.point, bombFailMaterial); reveal_collider(hitInfo.collider); ;
                     Debug.Log("BOMB SCAN FAILED at bearing : " + bearing);
                     return false;
                 }
@@ -362,5 +363,9 @@ public class LocationManager : Singleton<LocationManager>
         sphere.GetComponent<Renderer>().material = material;
         sphere.transform.localScale = 0.03f * new Vector3(1, 1, 1);
         Destroy(sphere.GetComponent<Collider>());
+    }
+
+    private void reveal_collider(Collider collider) {
+        collider.gameObject.GetComponent<Renderer>().material = bombFailMaterial;
     }
 }

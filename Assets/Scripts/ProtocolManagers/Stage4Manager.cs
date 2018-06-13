@@ -75,10 +75,10 @@ public class Stage4Manager : MonoBehaviour {
             "Look next to the inner-child at the Gesalt vase...",
             "However, the positive loving bond you have created with the inner-child using the previous protocols can be used to help overcome the negative emotions associated witht he vase. This can be done through singing your happy song for example.",
             "Excellent! Using the exercises learnt is a great way to relieve the stress caused by these dark emotions.",
-            "Once this is achieved, we can disassociate the dark emotions from the image and start to see new possibilites...",
+            "Once this is achieved, we can disassociate the dark emotions from the image and start to see new possibilities...",
             "Look at the new red outline, you should be able to make out two white faces!",
             "These white faces represent our adult-self and inner-child looking at each other in a loving relationship",
-            "We tend to see thing from different perspectives depending on our emotions",
+            "We tend to see things from different perspectives depending on our emotions",
 
             "Finally, through performing these protocols to increase positive affects and contain the inner-child's negative thoughts and emotions...",
             "we start to realise these feelings stem from our negative past experiences e.g. toxic parental relationships.",
