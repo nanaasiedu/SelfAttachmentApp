@@ -27,7 +27,7 @@ public static class ScenesData {
 
     public static int songRate_numberOfWords = 3;
     public static float songRate_perSecond = 2.5f;
-    public static float songDuration = 10.0f;
+    public static float songDuration = 7.0f;//10.0f;
 
     public static int pledgeRate_numberOfWords = 4;
     public static float pledgeRate_perSecond = 3.0f;
@@ -36,13 +36,13 @@ public static class ScenesData {
     public static int phraseDetectionLookAhead = 2;
     public static float phraseDetectionPercentage = 0.6f;
 
-    private static int numberOfScans = 6;
-    public static float scanningDuration = 1.5f * numberOfScans;
+    private static int numberOfScans = 5;
+    public static float scanningDuration = 2.5f * numberOfScans;
     public static int minimumHorizontalSurfaces = 1;
     public static int minimumVerticalSurfaces = 1;
 
     public static float childStartDistance = 1.5f;
-    public static float childHeightOffset = -0.10f;
+    public static float childHeightOffset = -0.15f;
     public static float childStartPositionCheckAngle = 360.0f / 32.0f;
     public static float floorHitAllowance = 0.2f;
     public static float childMidHeight = 0.6f - 0.3f;

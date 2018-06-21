@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using HoloToolkit.Unity;
+using HoloToolkit.Unity.SpatialMapping;
 
 public class Stage4Manager : MonoBehaviour {
 
@@ -20,6 +21,7 @@ public class Stage4Manager : MonoBehaviour {
     public GameObject plantPotPrefab;
     public GameObject chandelierPrefab;
     public GameObject portraitPrefab;
+    public GameObject portrait2Prefab;
 
     private IEnumerator hugProtocolCoroutine;
     private bool hugProtocolComplete = false;
@@ -252,6 +254,7 @@ public class Stage4Manager : MonoBehaviour {
 
             child.SendMessage("SetHappyEmotion");
             activateDialogScreen();
+            dialogScreen.SetActive(false);
             dialogScreen.SendMessage("AdvanceText");
 
             transformRoom();
@@ -400,7 +403,7 @@ public class Stage4Manager : MonoBehaviour {
         placePlants();
         placeChandelier();
         placePlantPot();
-        placePortrait();
+        placePortraits();
     }
 
     private void placeCarpet() {
@@ -428,13 +431,20 @@ public class Stage4Manager : MonoBehaviour {
 
     private void placePlantPot() {
         GameObject plantPot = (GameObject)Instantiate(plantPotPrefab);
+        plantPot.AddComponent<TapToPlace>();
         plantPot.transform.position = LocationManager.Instance.PlantPotPosition;
     }
 
-    private void placePortrait() {
+    private void placePortraits() {
         GameObject portrait = portraitPrefab;
         portrait.SetActive(true);
         portrait.transform.position = LocationManager.Instance.wallPortraitPosition;
         portrait.transform.forward = LocationManager.Instance.wallPortraitNormal;
+
+        GameObject portrait2 = portrait2Prefab;
+        portrait2.SetActive(true);
+        portrait2.transform.position = LocationManager.Instance.wallPortraitPosition;
+        portrait2.transform.forward = LocationManager.Instance.wallPortraitNormal;
+
     }
 }

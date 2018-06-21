@@ -74,31 +74,40 @@ public class LocationManager : Singleton<LocationManager>
         }
     }
 
+    private float startWallScanBearing = 0f;
+
+    private bool secondPortrait = true;
+
     public Vector3 wallPortraitPosition {
         get
         {
+            secondPortrait = !secondPortrait;
             Vector3 currDir = Vector3.forward;
             Vector3 headPosition = headTransform.position;
 
-            for (float bearing = 0.0f; bearing < 360.0f; bearing += ScenesData.childStartPositionCheckAngle)
-            {
-                if (bearing != 0.0f) currDir = Quaternion.Euler(0, ScenesData.childStartPositionCheckAngle, 0) * currDir;
-
-                RaycastHit hitInfo;
-                bool hit = Physics.Raycast(headPosition, currDir, out hitInfo);
-
-                if (hit)
+                for (float bearing = startWallScanBearing; bearing < 360.0f; bearing += ScenesData.childStartPositionCheckAngle)
                 {
-                    Debug.Log("Portrait found wall");
-                    wallPortraitNormal = -hitInfo.normal;
-                    return hitInfo.point;
+                    if (bearing != 0.0f) currDir = Quaternion.Euler(0, ScenesData.childStartPositionCheckAngle, 0) * currDir;
+
+                    RaycastHit hitInfo;
+                    bool hit = Physics.Raycast(headPosition, currDir, out hitInfo);
+
+                    if (hit)
+                    {
+                        Debug.Log("Portrait found wall");
+                        wallPortraitNormal = -hitInfo.normal;
+
+                    startWallScanBearing = bearing + 10f;
+                        return hitInfo.point;
+                    }
+
                 }
 
-            }
+            
 
             Debug.Log("No wall detected");
-            wallPortraitNormal = defaultPortraitWallPosition;
-            return defaultPortraitWallPosition;
+            wallPortraitNormal = (!secondPortrait ? defaultPortraitNormal : defaultPortraitNormal2);
+            return (!secondPortrait ? defaultPortraitWallPosition : defaultPortraitWallPosition2); ;
         }
     }
 
@@ -113,11 +122,32 @@ public class LocationManager : Singleton<LocationManager>
         }
     }
 
+    public Vector3 defaultPortraitWallPosition2
+    {
+        get
+        {
+            headTransform.rotation = new Quaternion(0, headTransform.rotation.y, 0, 1);
+            Vector3 headForward = headTransform.forward;
+
+            headForward = Quaternion.Euler(0, -35, 0) * headForward;
+
+            return ChildLocation + 3f * headForward;
+        }
+    }
+
     public Vector3 wallPortraitNormal;
 
     private Vector3 defaultPortraitNormal {
         get {
             return (Quaternion.Euler(0, 35, 0) * headTransform.forward);
+        }
+    }
+
+    private Vector3 defaultPortraitNormal2
+    {
+        get
+        {
+            return (Quaternion.Euler(0, -35, 0) * headTransform.forward);
         }
     }
 
