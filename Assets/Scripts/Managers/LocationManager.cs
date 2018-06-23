@@ -17,12 +17,6 @@ public class LocationManager : Singleton<LocationManager>
     private bool meshesProcessed = false;
 
     public bool ChildLocationSet { get; private set; }
-    public GameObject protocolManager;
-    public GameObject child;
-    public Transform headTransform;
-    public GameObject scanAlertMessage;
-    public HeadsUpDirectionIndicator directionIndicator;
-    public KeywordManager keywordManager;
 
     public Vector3 ChildLocation { get; private set; }
     public Vector3 CarpetLocation { get { return ChildLocation + Vector3.up * ScenesData.carpetHeightOffset; } }
@@ -48,7 +42,7 @@ public class LocationManager : Singleton<LocationManager>
     public Vector3 PlantPotPosition {
         get {
             Vector3 currDir = Vector3.forward;
-            Vector3 headPosition = headTransform.position;
+            Vector3 headPosition = ScenesData.headTransform.position;
 
             for (float bearing = 0.0f; bearing < 360.0f; bearing += ScenesData.childStartPositionCheckAngle)
             {
@@ -83,7 +77,7 @@ public class LocationManager : Singleton<LocationManager>
         {
             secondPortrait = !secondPortrait;
             Vector3 currDir = Vector3.forward;
-            Vector3 headPosition = headTransform.position;
+            Vector3 headPosition = ScenesData.headTransform.position;
 
                 for (float bearing = startWallScanBearing; bearing < 360.0f; bearing += ScenesData.childStartPositionCheckAngle)
                 {
@@ -97,7 +91,7 @@ public class LocationManager : Singleton<LocationManager>
                         Debug.Log("Portrait found wall");
                         wallPortraitNormal = -hitInfo.normal;
 
-                    startWallScanBearing = bearing + 10f;
+                        startWallScanBearing = bearing + 40f;
                         return hitInfo.point;
                     }
 
@@ -113,8 +107,8 @@ public class LocationManager : Singleton<LocationManager>
 
     public Vector3 defaultPortraitWallPosition {
         get {
-            headTransform.rotation = new Quaternion(0, headTransform.rotation.y, 0, 1);
-            Vector3 headForward = headTransform.forward;
+            ScenesData.headTransform.rotation = new Quaternion(0, ScenesData.headTransform.rotation.y, 0, 1);
+            Vector3 headForward = ScenesData.headTransform.forward;
 
             headForward = Quaternion.Euler(0, 35, 0) * headForward;
 
@@ -126,8 +120,8 @@ public class LocationManager : Singleton<LocationManager>
     {
         get
         {
-            headTransform.rotation = new Quaternion(0, headTransform.rotation.y, 0, 1);
-            Vector3 headForward = headTransform.forward;
+            ScenesData.headTransform.rotation = new Quaternion(0, ScenesData.headTransform.rotation.y, 0, 1);
+            Vector3 headForward = ScenesData.headTransform.forward;
 
             headForward = Quaternion.Euler(0, -35, 0) * headForward;
 
@@ -139,7 +133,7 @@ public class LocationManager : Singleton<LocationManager>
 
     private Vector3 defaultPortraitNormal {
         get {
-            return (Quaternion.Euler(0, 35, 0) * headTransform.forward);
+            return (Quaternion.Euler(0, 35, 0) * ScenesData.headTransform.forward);
         }
     }
 
@@ -147,19 +141,28 @@ public class LocationManager : Singleton<LocationManager>
     {
         get
         {
-            return (Quaternion.Euler(0, -35, 0) * headTransform.forward);
+            return (Quaternion.Euler(0, -35, 0) * ScenesData.headTransform.forward);
         }
     }
 
     private float floorY = 0;
 
     void Start () {
-        SurfaceMeshesToPlanes.Instance.MakePlanesComplete += SurfaceMeshesToPlanes_MakePlanesComplete;
-        child.SetActive(false);
-        scanAlertMessage.SetActive(true);
-        ChildLocationSet = false;
-        directionIndicator.HideIndicator();
+        StartScan();
     }
+
+    public void StartScan()
+    {
+        if (!meshesProcessed) SurfaceMeshesToPlanes.Instance.MakePlanesComplete += SurfaceMeshesToPlanes_MakePlanesComplete;
+        ScenesData.child.SetActive(false);
+        ScenesData.scanAlertMessage.SetActive(true);
+        ChildLocationSet = false;
+        ScenesData.directionIndicator.HideIndicator();
+
+        meshesProcessed = false;
+
+        SpatialMappingManager.Instance.StartObserver();
+}
 	
 	void Update () {
         if (!meshesProcessed && limitScanningByTime)
@@ -176,10 +179,6 @@ public class LocationManager : Singleton<LocationManager>
                 meshesProcessed = true;
             }
         }
-    }
-
-    public void findSceneryLocations() {
-
     }
 
     private void SurfaceMeshesToPlanes_MakePlanesComplete(object source, System.EventArgs args)
@@ -217,11 +216,11 @@ public class LocationManager : Singleton<LocationManager>
     }
 
     private void activateProtocol() {
-        scanAlertMessage.SetActive(false);
-        directionIndicator.ShowIndicator();
-        child.SetActive(true);
-        keywordManager.startKeywordRecognizer();
-        protocolManager.SendMessage("StartProtocol");
+        ScenesData.scanAlertMessage.SetActive(false);
+        ScenesData.directionIndicator.ShowIndicator();
+        ScenesData.child.SetActive(true);
+        ScenesData.keywordManager.startKeywordRecognizer();
+        ScenesData.protocolManager.SendMessage("StartProtocol");
     }
 
     private GameObject findFloorPlane(List<GameObject> horizontalPlanes) {
@@ -239,10 +238,10 @@ public class LocationManager : Singleton<LocationManager>
         float floorYPosition = floorPlane.transform.position.y;
         floorY = floorYPosition;
 
-        Vector3 headPosition = headTransform.position;
+        Vector3 headPosition = ScenesData.headTransform.position;
         //Vector3 headForward = Quaternion.Euler(-headTransform.rotation.x, 0, -headTransform.rotation.z) * headTransform.forward;
-        headTransform.rotation = new Quaternion(0, headTransform.rotation.y, 0, 1);
-        Vector3 headForward = headTransform.forward;
+        ScenesData.headTransform.rotation = new Quaternion(0, ScenesData.headTransform.rotation.y, 0, 1);
+        Vector3 headForward = ScenesData.headTransform.forward;
 
         for (float bearing = 0.0f; bearing < 360.0f; bearing += ScenesData.childStartPositionCheckAngle) {
             Debug.Log("Checking Bearing of: " + bearing);
@@ -347,7 +346,7 @@ public class LocationManager : Singleton<LocationManager>
         Vector3 planeThickness = (surfacePlane.PlaneThickness * surfacePlane.SurfaceNormal);
         ChildLocation = childFloorPosition + planeThickness + childHeightOffset;
         ChildLocationSet = true;
-        child.GetComponent<AreaManager>().ResetPosition();
+        ScenesData.child.GetComponent<AreaManager>().ResetPosition();
     }
 
     private void CreatePlanes()
@@ -377,7 +376,7 @@ public class LocationManager : Singleton<LocationManager>
     }
 
     private void setAlertText(string text) {
-        Text textComponent = scanAlertMessage.GetComponentInChildren<Text>();
+        Text textComponent = ScenesData.scanAlertMessage.GetComponentInChildren<Text>();
         textComponent.text = text;
     }
 
@@ -396,6 +395,6 @@ public class LocationManager : Singleton<LocationManager>
     }
 
     private void reveal_collider(Collider collider) {
-        collider.gameObject.GetComponent<Renderer>().material = bombFailMaterial;
+        //collider.gameObject.GetComponent<Renderer>().material = bombFailMaterial;
     }
 }

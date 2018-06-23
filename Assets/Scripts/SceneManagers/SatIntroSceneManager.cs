@@ -45,7 +45,7 @@ public class SatIntroSceneManager : MonoBehaviour {
     };
 
     void Start () {
-        if (!LocationManager.Instance.ChildLocationSet) return;
+        if (!LocationManager.Instance.ChildLocationSet || ScenesData.autoRoomScan) return;
         StartProtocol();
 	}
 

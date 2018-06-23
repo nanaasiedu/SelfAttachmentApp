@@ -52,7 +52,7 @@ public class Stage4Manager : MonoBehaviour {
 
     void Start()
     {
-        if (!LocationManager.Instance.ChildLocationSet) return;
+        if (!LocationManager.Instance.ChildLocationSet || ScenesData.autoRoomScan) return;
         StartProtocol();
     }
 
@@ -431,7 +431,6 @@ public class Stage4Manager : MonoBehaviour {
 
     private void placePlantPot() {
         GameObject plantPot = (GameObject)Instantiate(plantPotPrefab);
-        plantPot.AddComponent<TapToPlace>();
         plantPot.transform.position = LocationManager.Instance.PlantPotPosition;
     }
 

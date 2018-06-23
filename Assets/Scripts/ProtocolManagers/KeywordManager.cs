@@ -9,13 +9,14 @@ public class KeywordManager : MonoBehaviour {
     KeywordRecognizer keywordRecognizer = null;
     Dictionary<string, System.Action> keywords = new Dictionary<string, System.Action>();
     public GameObject protocolManager;
-    public HandsManager handsManager;
 
     void Start () {
         setKeywords();
 
         keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
         keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
+
+        if (LocationManager.Instance.ChildLocationSet) startKeywordRecognizer(); 
     }
 
     public void startKeywordRecognizer()
@@ -25,6 +26,10 @@ public class KeywordManager : MonoBehaviour {
 
     public void stopKeywordRecogniser() {
         keywordRecognizer.Stop();
+    }
+
+    public void endKeywordRecognizer() {
+        keywordRecognizer.Dispose();
     }
 
     public bool isRunning() {
@@ -44,7 +49,7 @@ public class KeywordManager : MonoBehaviour {
 
         keywords.Add("tap", () =>
         {
-            handsManager.selectFocusedObject();
+            HandsManager.Instance.selectFocusedObject();
         });
     }
 

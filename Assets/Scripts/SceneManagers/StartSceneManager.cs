@@ -6,6 +6,11 @@ using HoloToolkit.Unity;
 
 public class StartSceneManager : MonoBehaviour
 {
+    private void Start()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     void openTherapyRoomScene() {
         loadTherapyRoomScene(ScenesData.ProtocolType.NONE);
     }
@@ -30,6 +35,18 @@ public class StartSceneManager : MonoBehaviour
     private void loadTherapyRoomScene(ScenesData.ProtocolType protocolType) {
         ScenesData.currentProtocol = protocolType;
         Application.LoadLevel("TherapyRoom");
+    }
+
+    void setAutoScan() {
+        ScenesData.autoRoomScan = true;
+    }
+
+    void setShowMeshes() {
+        ScenesData.showMeshes = true;
+    }
+
+    void setDebugMode() {
+        ScenesData.debugMode = true;
     }
 
 }

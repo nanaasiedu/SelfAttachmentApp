@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using HoloToolkit.Unity;
+
 public static class ScenesData {
 
     public enum ProtocolType {
@@ -12,9 +14,21 @@ public static class ScenesData {
         STAGE_4
     }
 
+    /* CONTROL VARIABLES */
     public static ProtocolType currentProtocol = ProtocolType.NONE;
+    public static bool autoRoomScan = false;
+    public static bool showMeshes = false;
+    public static bool debugMode = false;
+    public static bool keywordsSet = false;
 
-    public static float dialogTextSpeed = 0.03f;
+    public static GameObject protocolManager;
+    public static GameObject scanAlertMessage;
+    public static GameObject child;
+    public static HeadsUpDirectionIndicator directionIndicator;
+    public static KeywordManager keywordManager;
+    public static Transform headTransform;
+
+    public static float dialogTextSpeed = 0.04f;
 
     public static float deadZoneRadius = 0.8f;
     public static float hugZoneRadius = 1.3f;
@@ -42,7 +56,7 @@ public static class ScenesData {
     public static int minimumVerticalSurfaces = 1;
 
     public static float childStartDistance = 1.5f;
-    public static float childHeightOffset = -0.15f;
+    public static float childHeightOffset = -0.1f;
     public static float childStartPositionCheckAngle = 360.0f / 32.0f;
     public static float floorHitAllowance = 0.2f;
     public static float childMidHeight = 0.6f - 0.3f;

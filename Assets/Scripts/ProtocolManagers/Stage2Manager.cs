@@ -19,7 +19,7 @@ public class Stage2Manager : MonoBehaviour {
     }
 	
 	void Start () {
-        if (!LocationManager.Instance.ChildLocationSet) return;
+        if (!LocationManager.Instance.ChildLocationSet || ScenesData.autoRoomScan) return;
         StartProtocol();
     }
 
@@ -28,11 +28,15 @@ public class Stage2Manager : MonoBehaviour {
 
         AnimatedText dialogScreenAnimatedText = dialogScreen.AddComponent<AnimatedText>() as AnimatedText;
         dialogScreenAnimatedText.textToSpeech = sceneManager.GetComponent<TextToSpeech>();
-        dialogScreenAnimatedText.strings = new string[6] {
-            "During this stage, you will start to form a connection with your inner-child.",
+        dialogScreenAnimatedText.strings = new string[] {
+         // "Depression has negative neurological effects on your brain. The brain has an arrangement of neural pathways that contain neurons that allow electrical signals to be sent to different parts of the body."
+            "During this stage, you will start to form a connection with your inner-child. You must imagine this child is a true representation of your younger self.",
+            
             "Your inner-child will become sad during times of distress.",
+
             "However, during positive moments in your life your inner-child will express happiness.",
             "Great! Hopefully you feel more connected with your inner-child.",
+
             "Let’s continue improve this connection. Embracing your inner-child is a great way to do this.",
             "Excellent! Now your connection with your inner child has increased"
         };
@@ -97,8 +101,12 @@ public class Stage2Manager : MonoBehaviour {
             dialogScreen.SendMessage("AdvanceText");
             child.SendMessage("SetNeutralEmotion");
         }
-        else if (protocolStep == 8) {
+        else if (protocolStep == 8)
+        {
             sceneManager.SendMessage("OpenStartPageScene");
+        }
+        else {
+            dialogScreen.SendMessage("AdvanceText");
         }
 
         protocolStep++;
